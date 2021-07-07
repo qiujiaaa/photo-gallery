@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 
 const connectDB = require('./config/db');
+const indexRoutes = require('./routes/indexRouter');
+const userRoutes = require('./routes/userRoutes');
 
 // load config
 dotenv.config({ path: './config/config.env' });
@@ -24,6 +26,10 @@ app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
+
+// routes
+app.use('/', indexRoutes);
+app.use('/user', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
