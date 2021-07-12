@@ -65,6 +65,8 @@ const Add = () => {
 		}
 	};
 
+	const handleSubmit = (e) => {};
+
 	return (
 		<div className={classes.root}>
 			<Grid container spacing={4}>
@@ -102,7 +104,9 @@ const Add = () => {
 			</Grid>
 			<Grid container className={classes.misc} spacing={3}>
 				<Grid item>
-					<Button variant="outlined">Add</Button>
+					<Button variant="outlined" onClick={handleSubmit}>
+						Add
+					</Button>
 				</Grid>
 				<Grid item>
 					<Typography color="error">{error}</Typography>
