@@ -14,7 +14,7 @@ import CameraIcon from '@material-ui/icons/Camera';
 const useStyles = makeStyles((theme) => ({
 	header: {
 		background: 'transparent',
-		color: '#efb6b2;',
+		color: '#efb6b2',
 		boxShadow: 'none',
 	},
 	logo: {
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	name: {
 		fontFamily: 'Noto Serif',
+		fontSize: 26,
 	},
 }));
 
