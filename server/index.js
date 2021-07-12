@@ -28,8 +28,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // routes
-app.use('/', indexRoutes);
-app.use('/user', userRoutes);
+app.use('/api', indexRoutes);
+app.use('/api/user', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
