@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	Button,
 	TextField,
@@ -48,6 +48,8 @@ const useStyles = makeStyles((theme) => ({
 const Add = () => {
 	const classes = useStyles();
 
+	const dispatch = useDispatch();
+
 	const [title, setTitle] = useState('');
 	const [caption, setCaption] = useState('');
 	const [file, setFile] = useState(null);
@@ -69,7 +71,7 @@ const Add = () => {
 	};
 
 	const handleSubmit = (e) => {
-		getPosts();
+		dispatch(getPosts());
 	};
 
 	const posts = useSelector((state) => state.posts);
