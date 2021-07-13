@@ -9,7 +9,7 @@ import {
 	Typography,
 } from '@material-ui/core';
 
-import { getPosts } from '../actions/posts';
+import { createPost } from '../actions/posts';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -71,11 +71,11 @@ const Add = () => {
 	};
 
 	const handleSubmit = (e) => {
-		dispatch(getPosts());
+		dispatch(createPost(file));
+		setFile(null);
 	};
 
 	const posts = useSelector((state) => state.posts);
-	console.log(posts);
 
 	return (
 		<div className={classes.root}>

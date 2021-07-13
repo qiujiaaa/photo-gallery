@@ -5,6 +5,11 @@ const users = 'http://localhost:5000/api/user';
 
 export const fetchPosts = () => axios.get(posts);
 
-export const createPost = (newPost) => {
-	axios.post(posts, newPost);
+export const createPost = async (newPost) => {
+	try {
+		const res = await axios.post(posts, newPost);
+		console.log(res);
+	} catch (err) {
+		console.log(err.message);
+	}
 };

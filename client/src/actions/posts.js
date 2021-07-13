@@ -16,7 +16,9 @@ export const getPosts = () => async (dispatch) => {
 
 export const createPost = (post) => async (dispatch) => {
 	try {
-		const data = await api.createPost(post);
+		const formData = new FormData();
+		formData.append('file', post);
+		const data = await api.createPost(formData);
 		dispatch({
 			type: 'CREATE',
 			payload: data,

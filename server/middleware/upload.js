@@ -1,5 +1,6 @@
 const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
+const util = require('util');
+const { GridFsStorage } = require('multer-gridfs-storage');
 
 const storage = new GridFsStorage({
 	url: process.env.MONGO_URI,
@@ -21,4 +22,6 @@ const storage = new GridFsStorage({
 	},
 });
 
-module.exports = multer({ storage });
+const uploadFile = multer({ storage: storage }).single('file');
+const uploadFilesMiddleware = util.promisify(uploadFile);
+module.exports = uploadFilesMiddleware;

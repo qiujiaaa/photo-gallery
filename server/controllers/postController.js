@@ -1,4 +1,5 @@
 const Post = require('../models/PostModel');
+const upload = require('../middleware/upload');
 
 const getPosts = async (req, res) => {
 	try {
@@ -10,10 +11,15 @@ const getPosts = async (req, res) => {
 };
 
 const addPost = async (req, res) => {
-	if (req.file) {
+	try {
+		await upload(req, res);
+		if (req.file == undefined) {
+			return res.status(500).json({ message: 'File error' });
+		}
 		res.send(req.file.id);
-	} else {
-		res.status(404).send('File error.');
+	} catch (err) {
+		console.log(err.message);
+		res.status(404).json({ message: err.message });
 	}
 };
 
