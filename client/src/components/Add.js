@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
 	Button,
 	TextField,
@@ -7,6 +8,8 @@ import {
 	makeStyles,
 	Typography,
 } from '@material-ui/core';
+
+import { getPosts } from '../actions/posts';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -65,13 +68,18 @@ const Add = () => {
 		}
 	};
 
-	const handleSubmit = (e) => {};
+	const handleSubmit = (e) => {
+		getPosts();
+	};
+
+	const posts = useSelector((state) => state.posts);
+	console.log(posts);
 
 	return (
 		<div className={classes.root}>
 			<Grid container spacing={4}>
 				<Grid item xs={12} md={5}>
-					<Grid container item classname={classes.form} spacing={2}>
+					<Grid container item className={classes.form} spacing={2}>
 						<Grid container item>
 							<TextField
 								label="Title"

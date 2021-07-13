@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 		height: 200,
 	},
 	actions: {
-		justify: 'space-between',
+		justifyContent: 'space-between',
 	},
 }));
 
@@ -29,7 +29,7 @@ const Post = () => {
 	const classes = useStyles();
 
 	return (
-		<Card variant="raised" className={classes.card}>
+		<Card variant="elevation" className={classes.card}>
 			<CardMedia
 				className={classes.cardmedia}
 				image={cat}

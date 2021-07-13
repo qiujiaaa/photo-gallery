@@ -34,10 +34,10 @@ const Header = () => {
 	return (
 		<AppBar position="static" className={classes.header}>
 			<Toolbar>
-				<Grid justify="space-between" container spacing={24}>
+				<Grid justifyContent="space-between" container spacing={1}>
 					<Box className={classes.logo}>
 						<IconButton
-							size="large"
+							size="medium"
 							edge="start"
 							color="inherit"
 							aria-label="menu"
