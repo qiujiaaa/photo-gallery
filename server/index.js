@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const connectDB = require('./config/db');
 const indexRoutes = require('./routes/indexRouter');
@@ -14,6 +15,9 @@ const app = express();
 
 // morgan for logging
 app.use(morgan('dev'));
+
+// cors to fix cross origin error
+app.use(cors());
 
 // connect to db
 connectDB();
