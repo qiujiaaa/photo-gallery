@@ -1,9 +1,5 @@
 const Post = require('../models/PostModel');
 
-const redirectDashboard = (req, res) => {
-	res.redirect(301, '/dashboard');
-};
-
 const getPosts = async (req, res) => {
 	try {
 		const posts = await Post.find();
@@ -13,4 +9,4 @@ const getPosts = async (req, res) => {
 	}
 };
 
-module.exports = { redirectDashboard, getPosts };
+module.exports = { getPosts };

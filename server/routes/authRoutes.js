@@ -1,12 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
-const {
-	getPosts,
-	redirectDashboard,
-} = require('../controllers/indexController');
+const { redirectDashboard } = require('../controllers/authController');
 
 router.get('/', redirectDashboard);
-router.get('/dashboard', getPosts);
 
 module.exports = router;

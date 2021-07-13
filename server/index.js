@@ -4,8 +4,9 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 
 const connectDB = require('./config/db');
-const indexRoutes = require('./routes/indexRouter');
+const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes');
 
 // load config
 dotenv.config({ path: './config/config.env' });
@@ -32,8 +33,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // routes
-app.use('/api', indexRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
 
 const PORT = process.env.PORT || 5000;
 
