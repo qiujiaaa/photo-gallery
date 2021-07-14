@@ -14,16 +14,21 @@ export const getPosts = () => async (dispatch) => {
 	}
 };
 
-export const createPost = (post) => async (dispatch) => {
-	try {
-		const formData = new FormData();
-		formData.append('file', post);
-		const data = await api.createPost(formData);
-		dispatch({
-			type: 'CREATE',
-			payload: data,
-		});
-	} catch (err) {
-		console.log(err);
-	}
-};
+export const createPost =
+	({ title, caption, file }) =>
+	async (dispatch) => {
+		try {
+			// first add image
+			const formData = new FormData();
+			formData.append('file', file);
+			const data = await api.createImage(formData);
+			const img = data.data;
+			const post = await api.createPost({ title, caption, img });
+			dispatch({
+				type: 'CREATE',
+				payload: post,
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};

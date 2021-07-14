@@ -11,8 +11,7 @@ const postSchema = new mongoose.Schema({
 		trim: true,
 	},
 	img: {
-		data: Buffer,
-		contentType: String,
+		type: mongoose.Schema.ObjectId,
 	},
 	createdAt: {
 		type: Date,

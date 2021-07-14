@@ -6,7 +6,7 @@ const cors = require('cors');
 // load config
 dotenv.config({ path: './config/config.env' });
 
-const connectDB = require('./config/db');
+const { connectDB } = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');

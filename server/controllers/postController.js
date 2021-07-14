@@ -10,7 +10,7 @@ const getPosts = async (req, res) => {
 	}
 };
 
-const addPost = async (req, res) => {
+const addImage = async (req, res) => {
 	try {
 		await upload(req, res);
 		if (req.file == undefined) {
@@ -18,9 +18,18 @@ const addPost = async (req, res) => {
 		}
 		res.send(req.file.id);
 	} catch (err) {
-		console.log(err.message);
 		res.status(404).json({ message: err.message });
 	}
 };
 
-module.exports = { getPosts, addPost };
+const addPost = async (req, res) => {
+	try {
+		console.log(req.body);
+		await Post.create(req.body);
+		res.send('Post added');
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
+};
+
+module.exports = { getPosts, addImage, addPost };

@@ -71,11 +71,9 @@ const Add = () => {
 	};
 
 	const handleSubmit = (e) => {
-		dispatch(createPost(file));
+		dispatch(createPost({ title, caption, file }));
 		setFile(null);
 	};
-
-	const posts = useSelector((state) => state.posts);
 
 	return (
 		<div className={classes.root}>

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 
+let gfs;
+
 const connectDB = async () => {
 	try {
 		const conn = await mongoose.connect(process.env.MONGO_URI, {
@@ -11,7 +13,6 @@ const connectDB = async () => {
 		});
 		console.log(`Connected to MongoDB: ${conn.connection.host}`);
 
-		let gfs;
 		mongoose.connection.once('open', function () {
 			gfs = Grid(mongoose.connection.db, mongoose.mongo);
 			gfs.collection('photos');
@@ -21,4 +22,4 @@ const connectDB = async () => {
 	}
 };
 
-module.exports = connectDB;
+module.exports = { connectDB, gfs };
