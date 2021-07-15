@@ -8,6 +8,7 @@ import {
 	makeStyles,
 	Typography,
 } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 
 import { createPost } from '../actions/posts';
 
@@ -54,6 +55,11 @@ const Add = () => {
 	const [caption, setCaption] = useState('');
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState('');
+	const [complete, setComplete] = useState(false);
+
+	if (complete) {
+		return <Redirect push to="/" />;
+	}
 
 	const fileChangeHandler = (e) => {
 		const types = ['image/png', 'image/jpeg'];
@@ -71,55 +77,71 @@ const Add = () => {
 	};
 
 	const handleSubmit = (e) => {
+		e.preventDefault();
 		dispatch(createPost({ title, caption, file }));
+
+		setTitle('');
+		setCaption('');
 		setFile(null);
+		setComplete(true);
 	};
 
 	return (
 		<div className={classes.root}>
-			<Grid container spacing={4}>
-				<Grid item xs={12} md={5}>
-					<Grid container item className={classes.form} spacing={2}>
-						<Grid container item>
-							<TextField
-								label="Title"
-								variant="outlined"
-								onChange={(e) => setTitle(e.target.value)}
-							/>
+			<form onSubmit={handleSubmit}>
+				<Grid container spacing={4}>
+					<Grid item xs={12} md={5}>
+						<Grid
+							container
+							item
+							className={classes.form}
+							spacing={2}
+						>
+							<Grid container item>
+								<TextField
+									label="Title"
+									variant="outlined"
+									required
+									onChange={(e) => setTitle(e.target.value)}
+								/>
+							</Grid>
+							<Grid container item>
+								<TextField
+									fullWidth={true}
+									multiline
+									InputProps={{
+										className: classes.caption,
+									}}
+									label="Caption"
+									variant="outlined"
+									onChange={(e) => setCaption(e.target.value)}
+								/>
+							</Grid>
+							<Grid container item>
+								<input
+									type="file"
+									onChange={fileChangeHandler}
+								/>
+							</Grid>
 						</Grid>
-						<Grid container item>
-							<TextField
-								fullWidth={true}
-								multiline
-								InputProps={{
-									className: classes.caption,
-								}}
-								label="Caption"
-								variant="outlined"
-								onChange={(e) => setCaption(e.target.value)}
-							/>
-						</Grid>
-						<Grid container item>
-							<input type="file" onChange={fileChangeHandler} />
+					</Grid>
+					<Grid item>
+						<Grid>
+							<Box className={classes.preview} />
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item>
-					<Grid>
-						<Box className={classes.preview} />
+				<Grid container className={classes.misc} spacing={3}>
+					<Grid item>
+						<Button variant="outlined" type="submit">
+							Add
+						</Button>
+					</Grid>
+					<Grid item>
+						<Typography color="error">{error}</Typography>
 					</Grid>
 				</Grid>
-			</Grid>
-			<Grid container className={classes.misc} spacing={3}>
-				<Grid item>
-					<Button variant="outlined" onClick={handleSubmit}>
-						Add
-					</Button>
-				</Grid>
-				<Grid item>
-					<Typography color="error">{error}</Typography>
-				</Grid>
-			</Grid>
+			</form>
 		</div>
 	);
 };
