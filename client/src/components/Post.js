@@ -40,7 +40,7 @@ const Post = ({ post }) => {
 			/>
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="div">
-					{DataTransferItemList}
+					{title}
 				</Typography>
 				<Typography variant="body2">{caption}</Typography>
 			</CardContent>

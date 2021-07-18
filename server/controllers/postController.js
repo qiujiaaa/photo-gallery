@@ -1,12 +1,14 @@
 const Post = require('../models/PostModel');
 const upload = require('../middleware/upload');
+const { gfs } = require('../config/db');
 
 const getPosts = async (req, res) => {
 	try {
 		const posts = await Post.find();
+
 		res.send(posts);
 	} catch (err) {
-		res.status(404).json({ message: err.message });
+		res.status(500).json({ message: err.message });
 	}
 };
 

@@ -1,8 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Box, makeStyles } from '@material-ui/core';
 
 import Post from './Post';
+import { getPosts } from '../actions/posts';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -23,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getPosts());
+	}, [dispatch]);
+
 	const posts = useSelector((state) => state.posts);
 	console.log(posts);
 
