@@ -24,9 +24,8 @@ const addImage = async (req, res) => {
 
 const addPost = async (req, res) => {
 	try {
-		console.log(req.body);
-		await Post.create(req.body);
-		res.send('Post added');
+		const post = await Post.create(req.body);
+		res.send(post);
 	} catch (err) {
 		res.status(404).json({ message: err.message });
 	}
