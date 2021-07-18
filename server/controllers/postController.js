@@ -1,14 +1,37 @@
+const mongoose = require('mongoose');
+const Grid = require('gridfs-stream');
+
 const Post = require('../models/PostModel');
 const upload = require('../middleware/upload');
-const { gfs } = require('../config/db');
+
+let gfs;
+mongoose.connection.once('open', function () {
+	gfs = Grid(mongoose.connection.db, mongoose.mongo);
+	gfs.collection('photos');
+});
 
 const getPosts = async (req, res) => {
 	try {
 		const posts = await Post.find();
-
-		res.send(posts);
+		res.status(200).send(posts);
 	} catch (err) {
 		res.status(500).json({ message: err.message });
+	}
+};
+
+const getImage = async (req, res) => {
+	try {
+		const file = await gfs.files.findOne({
+			_id: new mongoose.mongo.ObjectId(req.params.id),
+		});
+		const readStream = gfs.createReadStream(file.filename);
+		res.set({
+			'content-type': 'binary/octet-stream',
+			'content-disposition': 'inline',
+		});
+		readStream.pipe(res);
+	} catch (err) {
+		res.status(404).json({ message: err.message });
 	}
 };
 
@@ -33,4 +56,4 @@ const addPost = async (req, res) => {
 	}
 };
 
-module.exports = { getPosts, addImage, addPost };
+module.exports = { getPosts, addImage, addPost, getImage };

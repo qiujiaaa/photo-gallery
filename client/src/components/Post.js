@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		display: 'inline-block',
 	},
 	cardmedia: {
-		height: 200,
+		height: 250,
 	},
 	actions: {
 		justifyContent: 'space-between',
@@ -34,7 +34,7 @@ const Post = ({ post }) => {
 		<Card variant="elevation" className={classes.card}>
 			<CardMedia
 				className={classes.cardmedia}
-				image={cat}
+				image={`/api/post/image/${post.img}`}
 				title={title}
 				component="img"
 			/>

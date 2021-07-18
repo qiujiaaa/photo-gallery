@@ -41,7 +41,7 @@ const Dashboard = () => {
 				{posts &&
 					posts.map((post) => {
 						return (
-							<Grid item xs={12} md={4}>
+							<Grid key={post._id} item xs={12} md={4}>
 								<Box className={classes.item}>
 									<Post post={post} />
 								</Box>

@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const Grid = require('gridfs-stream');
-
-let gfs;
 
 const connectDB = async () => {
 	try {
@@ -12,14 +9,9 @@ const connectDB = async () => {
 			useCreateIndex: true,
 		});
 		console.log(`Connected to MongoDB: ${conn.connection.host}`);
-
-		mongoose.connection.once('open', function () {
-			gfs = Grid(mongoose.connection.db, mongoose.mongo);
-			gfs.collection('photos');
-		});
 	} catch (err) {
 		console.log('Unable to connect to database.');
 	}
 };
 
-module.exports = { connectDB, gfs };
+module.exports = { connectDB };
