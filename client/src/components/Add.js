@@ -8,7 +8,7 @@ import {
 	makeStyles,
 	Typography,
 } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { createPost } from '../actions/posts';
 
@@ -55,11 +55,8 @@ const Add = () => {
 	const [caption, setCaption] = useState('');
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState('');
-	const [complete, setComplete] = useState(false);
 
-	if (complete) {
-		return <Redirect push to="/" />;
-	}
+	const history = useHistory();
 
 	const fileChangeHandler = (e) => {
 		const types = ['image/png', 'image/jpeg'];
@@ -83,7 +80,7 @@ const Add = () => {
 		setTitle('');
 		setCaption('');
 		setFile(null);
-		setComplete(true);
+		history.push('/');
 	};
 
 	return (
