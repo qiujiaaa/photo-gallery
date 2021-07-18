@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid, Box, makeStyles } from '@material-ui/core';
+import { Grid, Box, Fab, makeStyles } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import { useHistory } from 'react-router-dom';
 
 import Post from './Post';
 import { getPosts } from '../actions/posts';
@@ -21,6 +23,20 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'center',
 	},
+	fab: {
+		position: 'fixed',
+		margin: 0,
+		top: 'auto',
+		right: 20,
+		bottom: 20,
+		left: 'auto',
+		backgroundColor: '#efb6b2',
+		color: 'white',
+		'&:hover': {
+			color: '#efb6b2',
+			backgroundColor: 'white',
+		},
+	},
 }));
 
 const Dashboard = () => {
@@ -34,6 +50,11 @@ const Dashboard = () => {
 	console.log(posts);
 
 	const classes = useStyles();
+
+	const history = useHistory();
+	const handleAdd = () => {
+		history.push('/add');
+	};
 
 	return (
 		<div className={classes.root}>
@@ -49,6 +70,15 @@ const Dashboard = () => {
 						);
 					})}
 			</Grid>
+
+			<Fab
+				onClick={() => handleAdd()}
+				className={classes.fab}
+				variant="extended"
+			>
+				<AddIcon />
+				Add Post
+			</Fab>
 		</div>
 	);
 };
