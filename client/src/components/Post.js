@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Post = () => {
+const Post = ({ post }) => {
+	const { title, caption } = post;
+
 	const classes = useStyles();
 
 	return (
@@ -33,18 +35,14 @@ const Post = () => {
 			<CardMedia
 				className={classes.cardmedia}
 				image={cat}
-				title="Cat"
+				title={title}
 				component="img"
 			/>
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="div">
-					Cat
+					{title}
 				</Typography>
-				<Typography variant="body2">
-					Lizards are a widespread group of squamate reptiles, with
-					over 6,000 species, ranging across all continents except
-					Antarctica
-				</Typography>
+				<Typography variant="body2">{caption}</Typography>
 			</CardContent>
 			<CardActions className={classes.actions}>
 				<Button size="small">Author name</Button>
