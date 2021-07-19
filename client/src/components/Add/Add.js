@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, TextField, Grid, Box, Typography } from '@material-ui/core';
+import PhotoIcon from '@material-ui/icons/Photo';
 import { useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
@@ -15,6 +16,7 @@ const Add = () => {
 	const [caption, setCaption] = useState('');
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState('');
+	const [preview, setPreview] = useState(null);
 
 	const history = useHistory();
 
@@ -26,6 +28,7 @@ const Add = () => {
 		if (selected && types.includes(selected.type)) {
 			// true if file exists
 			setFile(selected);
+			setPreview(URL.createObjectURL(selected));
 			setError('');
 		} else {
 			setFile(null);
@@ -84,7 +87,25 @@ const Add = () => {
 					</Grid>
 					<Grid item>
 						<Grid>
-							<Box className={classes.preview} />
+							<Box className={classes.preview}>
+								{preview && (
+									<img
+										className={classes.previewPic}
+										src={preview}
+										alt="no input"
+									/>
+								)}
+								{!preview && (
+									<Box className={classes.previewBox}>
+										<PhotoIcon
+											className={classes.previewIcon}
+										/>
+										<Typography >
+											Preview
+										</Typography>
+									</Box>
+								)}
+							</Box>
 						</Grid>
 					</Grid>
 				</Grid>

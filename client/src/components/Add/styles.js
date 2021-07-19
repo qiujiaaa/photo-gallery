@@ -26,10 +26,26 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	preview: {
 		marginLeft: '20px',
+		fontStyle: 'italic',
+	},
+	previewBox: {
 		background: '#efb6b2',
 		height: 350,
 		width: 350,
 		borderRadius: 16,
 		opacity: 0.3,
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	previewIcon: {
+		fontSize: 70,
+		opacity: 0.5,
+	},
+	previewPic: {
+		maxHeight: 350,
+		opacity: 1,
+		borderRadius: 16,
 	},
 }));
