@@ -1,43 +1,12 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid, Box, Fab, makeStyles } from '@material-ui/core';
+import { Grid, Box, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
 
-import Post from './Post';
-import { getPosts } from '../actions/posts';
-
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		marginLeft: '80px',
-		marginRight: '80px',
-		marginTop: '50px',
-		marginBottom: '50px',
-	},
-	grid: {
-		alignItems: 'center',
-		justify: 'center',
-	},
-	item: {
-		display: 'flex',
-		justifyContent: 'center',
-	},
-	fab: {
-		position: 'fixed',
-		margin: 0,
-		top: 'auto',
-		right: 20,
-		bottom: 20,
-		left: 'auto',
-		backgroundColor: '#efb6b2',
-		color: 'white',
-		'&:hover': {
-			color: '#efb6b2',
-			backgroundColor: 'white',
-		},
-	},
-}));
+import Post from './GridPost/GridPost';
+import { getPosts } from '../../actions/posts';
+import { useStyles } from './styles';
 
 const Dashboard = () => {
 	const dispatch = useDispatch();

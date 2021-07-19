@@ -6,24 +6,11 @@ import {
 	Typography,
 	CardActions,
 	Button,
-	makeStyles,
 	IconButton,
 } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import cat from './cat.jpg';
 
-const useStyles = makeStyles((theme) => ({
-	card: {
-		maxWidth: 345,
-		display: 'inline-block',
-	},
-	cardmedia: {
-		height: 250,
-	},
-	actions: {
-		justifyContent: 'space-between',
-	},
-}));
+import { useStyles } from './styles';
 
 const Post = ({ post }) => {
 	const { title, caption } = post;

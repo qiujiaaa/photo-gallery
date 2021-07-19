@@ -6,27 +6,11 @@ import {
 	Button,
 	Grid,
 	IconButton,
-	makeStyles,
 	Box,
 } from '@material-ui/core';
 import CameraIcon from '@material-ui/icons/Camera';
 
-const useStyles = makeStyles((theme) => ({
-	header: {
-		background: 'transparent',
-		color: '#efb6b2',
-		boxShadow: 'none',
-	},
-	logo: {
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
-	name: {
-		fontFamily: 'Noto Serif',
-		fontSize: 26,
-	},
-}));
+import { useStyles } from './styles';
 
 const Header = () => {
 	const classes = useStyles();
