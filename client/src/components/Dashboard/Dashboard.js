@@ -16,7 +16,7 @@ const Dashboard = () => {
 	}, [dispatch]);
 
 	const posts = useSelector((state) => state.posts);
-	console.log(posts);
+	posts.sort((x, y) => (x.createdAt < y.createdAt ? 1 : -1));
 
 	const classes = useStyles();
 
