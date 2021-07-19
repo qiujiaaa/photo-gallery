@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	name: {
 		fontFamily: 'Noto Serif',
-		fontSize: 26,
+		fontSize: 30,
+		marginLeft: '10px',
 	},
 }));
