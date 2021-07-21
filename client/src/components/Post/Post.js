@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Grid } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
@@ -15,17 +16,35 @@ const Post = () => {
 		dispatch(getPost(id));
 	}, [id, dispatch]);
 
-	const posts = useSelector((state) => state.posts);
-	const post = posts.find((x) => x._id === id);
+	let posts = useSelector((state) => state.posts);
+	let post = posts.find((x) => x._id === id);
 
 	if (!post) {
-		history.push(`/error/${POST_NOT_FOUND}`);
+		history.add(`/error/${POST_NOT_FOUND}`);
 	}
-	console.log(post);
 
 	const classes = useStyles();
 
-	return <div>post</div>;
+	return (
+		<div className={classes.root}>
+			{post && (
+				<Grid container spacing={4}>
+					<Grid item xs={12} md={6}>
+						<Grid>
+							<img
+								className={classes.image}
+								src={`/api/post/image/${post.img}`}
+								alt="error"
+							/>
+						</Grid>
+					</Grid>
+					<Grid container item>
+						<Grid>Hello</Grid>
+					</Grid>
+				</Grid>
+			)}
+		</div>
+	);
 };
 
 export default Post;

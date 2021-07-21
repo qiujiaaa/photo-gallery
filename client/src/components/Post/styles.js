@@ -1,17 +1,15 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
-	card: {
-		maxWidth: 345,
-		display: 'inline-block',
-		'&:hover': {
-			cursor: 'pointer',
-		},
+	root: {
+		flexGrow: 1,
+		marginLeft: '80px',
+		marginRight: '80px',
+		marginTop: '50px',
+		marginBottom: '50px',
 	},
-	cardmedia: {
-		height: 250,
+	image: {
+		maxWidth: '100%',
 	},
-	actions: {
-		justifyContent: 'space-between',
-	},
+	description: {},
 }));
