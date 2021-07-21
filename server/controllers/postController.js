@@ -19,6 +19,16 @@ const getPosts = async (req, res) => {
 	}
 };
 
+const getPost = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const post = await Post.findById(id);
+		res.status(200).send(post);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+};
+
 const getImage = async (req, res) => {
 	try {
 		const file = await gfs.files.findOne({
@@ -56,4 +66,4 @@ const addPost = async (req, res) => {
 	}
 };
 
-module.exports = { getPosts, addImage, addPost, getImage };
+module.exports = { getPosts, getPost, addImage, addPost, getImage };
