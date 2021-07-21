@@ -1,23 +1,29 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
 import { getPost } from '../../actions/posts';
+import { POST_NOT_FOUND } from '../../constants/error';
 
 const Post = () => {
-	const dispatch = useDispatch();
-
 	const { id } = useParams();
+	const history = useHistory();
 
-	const classes = useStyles();
-
+	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getPost(id));
 	}, [id, dispatch]);
 
 	const posts = useSelector((state) => state.posts);
-	console.log(posts);
+	const post = posts.find((x) => x._id === id);
+
+	if (!post) {
+		history.push(`/error/${POST_NOT_FOUND}`);
+	}
+	console.log(post);
+
+	const classes = useStyles();
 
 	return <div>post</div>;
 };

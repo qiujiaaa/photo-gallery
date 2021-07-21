@@ -6,13 +6,10 @@ const reducer = (posts = [], action) => {
 			return [...posts, action.payload];
 		case 'UPDATE':
 			if (posts.some((x) => x._id === action.payload._id)) {
-				console.log('exists');
 				return posts.map((post) =>
 					post._id === action.payload._id ? action.payload : post
 				);
 			} else {
-				console.log('not exists');
-
 				return [...posts, action.payload];
 			}
 		default:
