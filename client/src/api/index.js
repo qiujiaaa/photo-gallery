@@ -6,6 +6,15 @@ const users = 'http://localhost:5000/api/user';
 
 export const fetchPosts = () => axios.get(posts);
 
+export const fetchPost = async (id) => {
+	try {
+		const res = await axios.get(posts + '/' + id);
+		return res;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
 export const fetchImage = async (image) => {
 	try {
 		const file = await axios.get(images + '/' + image);

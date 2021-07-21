@@ -14,6 +14,18 @@ export const getPosts = () => async (dispatch) => {
 	}
 };
 
+export const getPost = (id) => async (dispatch) => {
+	try {
+		const { data } = await api.fetchPost(id);
+		dispatch({
+			type: 'UPDATE',
+			payload: data,
+		});
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
 export const createPost =
 	({ title, caption, file }) =>
 	async (dispatch) => {

@@ -9,6 +9,7 @@ import {
 	IconButton,
 } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
 
@@ -17,8 +18,17 @@ const Post = ({ post }) => {
 
 	const classes = useStyles();
 
+	const history = useHistory();
+	const goIndividual = () => {
+		history.push(`/post/${post._id}`);
+	};
+
 	return (
-		<Card variant="elevation" className={classes.card}>
+		<Card
+			variant="elevation"
+			className={classes.card}
+			onClick={() => goIndividual()}
+		>
 			<CardMedia
 				className={classes.cardmedia}
 				image={`/api/post/image/${post.img}`}
