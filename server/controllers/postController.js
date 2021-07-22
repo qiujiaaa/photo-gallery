@@ -66,4 +66,18 @@ const addPost = async (req, res) => {
 	}
 };
 
-module.exports = { getPosts, getPost, addImage, addPost, getImage };
+const deletePost = async (req, res) => {
+	try {
+		const post = await Post.findById(req.params.id);
+		console.log(post);
+		await gfs.files.deleteOne({
+			_id: new mongoose.mongo.ObjectId(post.img),
+		});
+		await Post.findByIdAndRemove(req.params.id);
+		res.status(200).json({ message: 'Removed' });
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
+};
+
+module.exports = { getPosts, getPost, addImage, addPost, getImage, deletePost };
