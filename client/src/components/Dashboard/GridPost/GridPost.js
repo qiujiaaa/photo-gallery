@@ -12,6 +12,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
+import { previewCaption } from '../../../utils/captionUtil';
 
 const Post = ({ post }) => {
 	const { title, caption } = post;
@@ -39,7 +40,9 @@ const Post = ({ post }) => {
 				<Typography gutterBottom variant="h5" component="div">
 					{title}
 				</Typography>
-				<Typography variant="body2">{caption}</Typography>
+				<Typography variant="body2">
+					{previewCaption(caption)}
+				</Typography>
 			</CardContent>
 			<CardActions className={classes.actions}>
 				<Button size="small">Author name</Button>
