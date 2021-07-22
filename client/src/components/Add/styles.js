@@ -20,8 +20,6 @@ export const useStyles = makeStyles((theme) => ({
 		direction: 'column',
 	},
 	caption: {
-		paddingTop: 3,
-		height: 250,
 		flexGrow: 1,
 	},
 	preview: {

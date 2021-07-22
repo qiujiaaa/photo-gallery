@@ -72,6 +72,8 @@ const Add = () => {
 									InputProps={{
 										className: classes.caption,
 									}}
+									rows="15"
+									margin="normal"
 									label="Caption"
 									variant="outlined"
 									onChange={(e) => setCaption(e.target.value)}
@@ -100,9 +102,7 @@ const Add = () => {
 										<PhotoIcon
 											className={classes.previewIcon}
 										/>
-										<Typography >
-											Preview
-										</Typography>
+										<Typography>Preview</Typography>
 									</Box>
 								)}
 							</Box>

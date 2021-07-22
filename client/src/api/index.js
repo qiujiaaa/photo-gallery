@@ -36,6 +36,7 @@ export const createImage = async (image) => {
 export const createPost = async (post) => {
 	try {
 		const res = await axios.post(posts, post);
+		console.log(res.data);
 		return res.data;
 	} catch (err) {
 		console.log(err.message);
