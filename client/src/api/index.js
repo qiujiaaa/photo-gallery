@@ -42,3 +42,13 @@ export const createPost = async (post) => {
 		console.log(err.message);
 	}
 };
+
+export const deletePost = async (id) => {
+	try {
+		const res = await axios.delete(posts + '/' + id);
+		console.log(res.data);
+		return id;
+	} catch (err) {
+		console.log(err.message);
+	}
+};

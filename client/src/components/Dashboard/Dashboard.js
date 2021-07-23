@@ -15,7 +15,7 @@ const Dashboard = () => {
 		dispatch(getPosts());
 	}, [dispatch]);
 
-	const posts = useSelector((state) => state.posts);
+	let posts = useSelector((state) => state.posts);
 	posts.sort((x, y) => (x.createdAt < y.createdAt ? 1 : -1));
 
 	const classes = useStyles();

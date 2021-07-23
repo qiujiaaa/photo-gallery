@@ -9,6 +9,7 @@ export const getPosts = () => async (dispatch) => {
 			type: 'FETCH_ALL',
 			payload: data,
 		});
+		console.log(data);
 	} catch (err) {
 		console.log(err.message);
 	}
@@ -44,3 +45,15 @@ export const createPost =
 			console.log(err);
 		}
 	};
+
+export const deletePost = (id) => async (dispatch) => {
+	try {
+		const data = await api.deletePost(id);
+		dispatch({
+			type: 'DELETE',
+			payload: data,
+		});
+	} catch (err) {
+		console.log(err);
+	}
+};

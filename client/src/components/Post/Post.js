@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import {
 	Grid,
 	Typography,
-	Button,
 	Menu,
 	MenuItem,
 	Fade,
@@ -21,7 +20,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
-import { getPost } from '../../actions/posts';
+import { getPost, deletePost } from '../../actions/posts';
 import { POST_NOT_FOUND } from '../../constants/error';
 import { formatDate } from '../../utils/dateUtil';
 
@@ -32,13 +31,15 @@ const Post = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getPost(id));
-	}, [id, dispatch]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	let posts = useSelector((state) => state.posts);
 	let post = posts.find((x) => x._id === id);
+	//console.log(post);
 
 	if (!post) {
-		history.add(`/error/${POST_NOT_FOUND}`);
+		history.push(`/error/${POST_NOT_FOUND}`);
 	}
 
 	const classes = useStyles();
@@ -51,6 +52,20 @@ const Post = () => {
 	};
 
 	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	const handleShare = () => {
+		setAnchorEl(null);
+	};
+
+	const handleDelete = () => {
+		dispatch(deletePost(post._id));
+		setAnchorEl(null);
+		history.replace('/');
+	};
+
+	const handleEdit = () => {
 		setAnchorEl(null);
 	};
 
@@ -94,19 +109,19 @@ const Post = () => {
 										onClose={handleClose}
 										TransitionComponent={Fade}
 									>
-										<MenuItem onClick={handleClose}>
+										<MenuItem onClick={handleShare}>
 											<ShareIcon
 												className={classes.list}
 											/>
 											Share
 										</MenuItem>
-										<MenuItem onClick={handleClose}>
+										<MenuItem onClick={handleEdit}>
 											<EditIcon
 												className={classes.list}
 											/>
 											Edit
 										</MenuItem>
-										<MenuItem onClick={handleClose}>
+										<MenuItem onClick={handleDelete}>
 											<DeleteIcon
 												className={classes.list}
 											/>
