@@ -27,20 +27,24 @@ import { formatDate } from '../../utils/dateUtil';
 const Post = () => {
 	const { id } = useParams();
 	const history = useHistory();
-
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getPost(id));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+
+	const [fetched, setFetched] = useState(false);
 
 	let posts = useSelector((state) => state.posts);
+	console.log(posts);
 	let post = posts.find((x) => x._id === id);
-	//console.log(post);
 
-	if (!post) {
-		history.push(`/error/${POST_NOT_FOUND}`);
-	}
+	console.log(post);
+
+	useEffect(() => {
+		dispatch(getPost(id));
+		setFetched(true);
+		if (fetched && !post) {
+			history.push(`/error/${POST_NOT_FOUND}`);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const classes = useStyles();
 
