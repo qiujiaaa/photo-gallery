@@ -32,10 +32,7 @@ const Post = () => {
 	const [fetched, setFetched] = useState(false);
 
 	let posts = useSelector((state) => state.posts);
-	console.log(posts);
 	let post = posts.find((x) => x._id === id);
-
-	console.log(post);
 
 	useEffect(() => {
 		dispatch(getPost(id));
