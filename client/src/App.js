@@ -4,6 +4,7 @@ import Add from './components/Add/Add';
 import Error from './components/Error/Error';
 import Header from './components/Header/Header';
 import Dashboard from './components/Dashboard/Dashboard';
+import Login from './components/Login/Login';
 import Post from './components/Post/Post';
 
 function App() {
@@ -12,6 +13,9 @@ function App() {
 			<Header />
 			<Switch>
 				<Route exact path="/">
+					<Login />
+				</Route>
+				<Route path="/dashboard">
 					<Dashboard />
 				</Route>
 				<Route path="/post/:id">
@@ -20,7 +24,7 @@ function App() {
 				<Route path="/add">
 					<Add />
 				</Route>
-				<Route component={Error}/>
+				<Route component={Error} />
 			</Switch>
 		</Router>
 	);

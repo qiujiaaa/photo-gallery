@@ -53,7 +53,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // routes
-app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 
