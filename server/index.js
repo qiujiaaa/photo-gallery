@@ -2,6 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 // load config
 dotenv.config({ path: './config/config.env' });
@@ -10,6 +13,12 @@ const { connectDB } = require('./database/db');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
+
+// Passport config
+require('./config/passport')(passport);
+
+// connect to db
+connectDB();
 
 // initialise server
 const app = express();
@@ -20,12 +29,23 @@ app.use(morgan('dev'));
 // cors to fix cross origin error
 app.use(cors());
 
-// connect to db
-connectDB();
-
 // middleware parse JSON bodies | parse URL-encoded bodies
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+// sessions
+app.use(
+	session({
+		secret: 'keyboardcat',
+		resave: false,
+		saveUninitialized: false,
+		store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+	})
+);
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Logging
 if (process.env.NODE_ENV === 'development') {
