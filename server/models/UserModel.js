@@ -20,10 +20,15 @@ const UserSchema = new mongoose.Schema({
 	image: {
 		type: String,
 	},
+	token: {
+		type: String,
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now,
 	},
 });
+
+UserSchema.set('toJSON', { getters: true, virtuals: true });
 
 module.exports = mongoose.model('User', UserSchema);

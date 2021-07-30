@@ -13,22 +13,29 @@ const Login = () => {
 		alert(error);
 	};
 
-	const handleSuccess = (response) => {
+	const handleSuccess = async (response) => {
+		const tokenBlob = new Blob(
+			[JSON.stringify({ access_token: response.accessToken }, null, 2)],
+			{ type: 'application/json' }
+		);
 		const options = {
 			method: 'POST',
-			body: response.accessToken,
+			body: tokenBlob,
 			mode: 'cors',
 			cache: 'default',
 		};
 		fetch('http://localhost:5000/auth/google', options).then((r) => {
 			const token = r.headers.get('x-auth-token');
 			r.json().then((user) => {
+				console.log(user);
+				console.log(token);
 				if (token) {
 					setAuth(false);
 					setToken(token);
 					setUser(user);
 				}
 			});
+			console.log(r);
 		});
 	};
 

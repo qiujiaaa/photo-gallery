@@ -1,22 +1,22 @@
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
-const mongoose = require('mongoose');
+const GoogleTokenStrategy = require('passport-google-token').Strategy;
 const User = require('../models/UserModel');
 
 module.exports = function (passport) {
 	passport.use(
-		new GoogleStrategy(
+		new GoogleTokenStrategy(
 			{
 				clientID: process.env.GOOGLE_CLIENT_ID,
 				clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-				callbackURL: '/auth/google/callback',
 			},
-			async (accessToken, refreshToken, profile, done) => {
+			async function (accessToken, refreshToken, profile, done) {
+				console.log(profile);
 				const newUser = {
 					googleId: profile.id,
 					displayName: profile.displayName,
 					firstName: profile.name.givenName,
 					lastName: profile.name.familyName,
-					image: profile.photos[0].value,
+					image: profile.picture,
+					token: accessToken,
 				};
 				try {
 					let user = await User.findOne({ googleId: profile.id });

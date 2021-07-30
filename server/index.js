@@ -27,7 +27,13 @@ const app = express();
 app.use(morgan('dev'));
 
 // cors to fix cross origin error
-app.use(cors());
+var corsOption = {
+	origin: true,
+	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+	credentials: true,
+	exposedHeaders: ['x-auth-token'],
+};
+app.use(cors(corsOption));
 
 // middleware parse JSON bodies | parse URL-encoded bodies
 app.use(express.json({ limit: '50mb' }));

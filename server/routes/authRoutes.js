@@ -1,22 +1,25 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+const { generateToken, sendToken } = require('../utils/token');
 //const { redirectDashboard } = require('../controllers/authController');
 
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+router.post(
+	'/google',
+	passport.authenticate('google-token', { session: false }),
+	function (req, res, next) {
+		if (!req.user) {
+			return res.status(404).json({ message: 'User Not Authenticated' });
+		}
+		req.auth = {
+			id: req.user.id,
+		};
+		console.log(req.user);
 
-router.get(
-	'/google/callback',
-	passport.authenticate('google', { failureRedirect: '/' }),
-	(req, res) => {
-		// Successful authentication, redirect to dashboard.
-		res.redirect('http://localhost:3000/dashboard');
-	}
+		next();
+	},
+	generateToken,
+	sendToken
 );
-
-router.get('/logout', (req, res) => {
-	req.logout();
-	res.redirect('/');
-});
 
 module.exports = router;
