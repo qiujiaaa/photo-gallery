@@ -18,7 +18,13 @@ module.exports = {
 		return next();
 	},
 	sendToken: function (req, res) {
-		res.setHeader('x-auth-token', req.token);
+		console.log(req.token);
+		res.cookie('jwt_token', req.token, {
+			expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // expires after a day
+			secure: true,
+			httpOnly: true,
+		});
+		//res.setHeader('x-auth-token', req.token);
 		return res.status(200).send(JSON.stringify(req.user));
 	},
 };

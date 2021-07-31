@@ -5,6 +5,7 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const cookieParser = require('cookie-parser');
 
 // load config
 dotenv.config({ path: './config/config.env' });
@@ -25,6 +26,10 @@ const app = express();
 
 // morgan for logging
 app.use(morgan('dev'));
+
+// cookies
+
+app.use(cookieParser());
 
 // cors to fix cross origin error
 var corsOption = {

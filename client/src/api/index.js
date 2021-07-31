@@ -4,6 +4,8 @@ const posts = 'http://localhost:5000/api/post';
 const images = 'http://localhost:5000/api/post/image';
 const users = 'http://localhost:5000/api/user';
 
+axios.defaults.withCredentials = true;
+
 export const fetchPosts = () => axios.get(posts);
 
 export const fetchPost = async (id) => {
@@ -64,14 +66,16 @@ export const authUser = async (token) => {
 			body: tokenBlob,
 			mode: 'cors',
 			cache: 'default',
+			credentials: 'include',
 		};
 		const response = await fetch(
 			'http://localhost:5000/auth/google',
 			options
 		);
-		const authToken = response.headers.get('x-auth-token');
+		//const authToken = response.headers.get('x-auth-token');
 		const user = await response.json();
-		return { authToken, user };
+		//return { authToken, user };
+		return user;
 	} catch (err) {
 		console.log(err.message);
 	}
