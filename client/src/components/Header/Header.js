@@ -21,10 +21,9 @@ const Header = () => {
 	// console.log('HEADER ', user);
 
 	const history = useHistory();
-	const handleAdd = () => {
-		console.log(history);
+	const handleClick = () => {
 		if (history.location.pathname !== '/') {
-			history.push('/');
+			history.push('/dashboard');
 		}
 	};
 
@@ -39,7 +38,7 @@ const Header = () => {
 							color="inherit"
 							aria-label="menu"
 							sx={{ mr: 2 }}
-							onClick={() => handleAdd()}
+							onClick={() => handleClick()}
 						>
 							<CameraIcon />
 							<Typography

@@ -13,7 +13,6 @@ mongoose.connection.once('open', function () {
 const getPosts = async (req, res) => {
 	try {
 		const posts = await Post.find();
-		console.log(req.cookies);
 		res.status(200).send(posts);
 	} catch (err) {
 		res.status(500).json({ message: err.message });

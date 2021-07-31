@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const posts = 'http://localhost:5000/api/post';
 const images = 'http://localhost:5000/api/post/image';
-const users = 'http://localhost:5000/api/user';
 
 axios.defaults.withCredentials = true;
 
@@ -72,9 +71,7 @@ export const authUser = async (token) => {
 			'http://localhost:5000/auth/google',
 			options
 		);
-		//const authToken = response.headers.get('x-auth-token');
 		const user = await response.json();
-		//return { authToken, user };
 		return user;
 	} catch (err) {
 		console.log(err.message);
