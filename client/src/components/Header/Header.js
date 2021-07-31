@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
 	AppBar,
 	Typography,
@@ -15,6 +16,9 @@ import { useStyles } from './styles';
 
 const Header = () => {
 	const classes = useStyles();
+
+	// const { user } = useSelector((state) => state.auth);
+	// console.log('HEADER ', user);
 
 	const history = useHistory();
 	const handleAdd = () => {

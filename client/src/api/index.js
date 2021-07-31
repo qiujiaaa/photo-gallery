@@ -52,3 +52,27 @@ export const deletePost = async (id) => {
 		console.log(err.message);
 	}
 };
+
+export const authUser = async (token) => {
+	try {
+		const tokenBlob = new Blob(
+			[JSON.stringify({ access_token: token }, null, 2)],
+			{ type: 'application/json' }
+		);
+		const options = {
+			method: 'POST',
+			body: tokenBlob,
+			mode: 'cors',
+			cache: 'default',
+		};
+		const response = await fetch(
+			'http://localhost:5000/auth/google',
+			options
+		);
+		const authToken = response.headers.get('x-auth-token');
+		const user = await response.json();
+		return { authToken, user };
+	} catch (err) {
+		console.log(err.message);
+	}
+};

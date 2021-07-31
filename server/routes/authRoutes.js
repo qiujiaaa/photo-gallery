@@ -14,7 +14,6 @@ router.post(
 		req.auth = {
 			id: req.user.id,
 		};
-		console.log(req.user);
 
 		next();
 	},
