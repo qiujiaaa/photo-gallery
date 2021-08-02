@@ -14,8 +14,6 @@ import Login from './components/Login/Login';
 import Post from './components/Post/Post';
 
 function App() {
-	console.log(useSelector((state) => state.auth));
-
 	const AuthenticatedRoute = ({ component: Component, ...rest }) => {
 		if (useSelector((state) => state.auth.isAuth)) {
 			return <Route {...rest} />;

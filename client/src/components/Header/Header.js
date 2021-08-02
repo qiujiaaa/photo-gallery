@@ -18,7 +18,7 @@ import { useStyles } from './styles';
 const Header = () => {
 	const classes = useStyles();
 
-	const { user } = useSelector((state) => state.auth);
+	const { user, isAuth } = useSelector((state) => state.auth);
 
 	const history = useHistory();
 	const handleClick = () => {
@@ -50,10 +50,12 @@ const Header = () => {
 							</Typography>
 						</IconButton>
 					</Box>
-					<Box className={classes.logo}>
-						<Avatar src={user.image}></Avatar>
-						<Button>{user.displayName}</Button>
-					</Box>
+					{isAuth && (
+						<Box className={classes.logo}>
+							<Avatar src={user.image}></Avatar>
+							<Button>{user.displayName}</Button>
+						</Box>
+					)}
 				</Grid>
 			</Toolbar>
 		</AppBar>
