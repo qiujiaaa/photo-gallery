@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import {
 	AppBar,
 	Typography,
@@ -23,7 +22,7 @@ const Header = () => {
 	const history = useHistory();
 	const handleClick = () => {
 		if (history.location.pathname !== '/') {
-			history.push('/dashboard');
+			history.push('/');
 		}
 	};
 

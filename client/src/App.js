@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Redirect,
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Add from './components/Add/Add';
 import Error from './components/Error/Error';
@@ -8,23 +14,40 @@ import Login from './components/Login/Login';
 import Post from './components/Post/Post';
 
 function App() {
+	const isAuthenticated = useSelector((state) => state.auth.isAuth);
+	console.log(isAuthenticated);
+
+	const AuthenticatedRoute = ({ component: Component, ...rest }) => {
+		if (isAuthenticated) {
+			return <Route {...rest} />;
+		}
+		return <Redirect to="/login" />;
+	};
+
+	const LoginRoute = ({ component: Component, ...rest }) => {
+		if (isAuthenticated) {
+			return <Redirect to="/dashboard" />;
+		}
+		return <Route {...rest} />;
+	};
+
 	return (
 		<Router>
 			<Header />
 			<Switch>
-				<Route exact path="/">
+				<LoginRoute path="/login">
 					<Login />
-				</Route>
-				<Route path="/dashboard">
+				</LoginRoute>
+				<AuthenticatedRoute path="/dashboard">
 					<Dashboard />
-				</Route>
-				<Route path="/post/:id">
+				</AuthenticatedRoute>
+				<AuthenticatedRoute path="/post/:id">
 					<Post />
-				</Route>
-				<Route path="/add">
+				</AuthenticatedRoute>
+				<AuthenticatedRoute path="/add">
 					<Add />
-				</Route>
-				<Route component={Error} />
+				</AuthenticatedRoute>
+				<AuthenticatedRoute component={Error} />
 			</Switch>
 		</Router>
 	);
