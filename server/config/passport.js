@@ -9,13 +9,12 @@ module.exports = function (passport) {
 				clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 			},
 			async function (accessToken, refreshToken, profile, done) {
-				console.log(profile);
 				const newUser = {
 					googleId: profile.id,
 					displayName: profile.displayName,
 					firstName: profile.name.givenName,
 					lastName: profile.name.familyName,
-					image: profile.picture,
+					image: profile._json.picture,
 					token: accessToken,
 				};
 				try {

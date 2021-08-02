@@ -14,18 +14,17 @@ import Login from './components/Login/Login';
 import Post from './components/Post/Post';
 
 function App() {
-	const isAuthenticated = useSelector((state) => state.auth.isAuth);
-	console.log(isAuthenticated);
+	console.log(useSelector((state) => state.auth));
 
 	const AuthenticatedRoute = ({ component: Component, ...rest }) => {
-		if (isAuthenticated) {
+		if (useSelector((state) => state.auth.isAuth)) {
 			return <Route {...rest} />;
 		}
 		return <Redirect to="/login" />;
 	};
 
 	const LoginRoute = ({ component: Component, ...rest }) => {
-		if (isAuthenticated) {
+		if (useSelector((state) => state.auth.isAuth)) {
 			return <Redirect to="/dashboard" />;
 		}
 		return <Route {...rest} />;

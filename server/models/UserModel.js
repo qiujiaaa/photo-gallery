@@ -29,6 +29,6 @@ const UserSchema = new mongoose.Schema({
 	},
 });
 
-UserSchema.set('toJSON', { getters: true, virtuals: true });
+//UserSchema.set('toJSON', { getters: true, virtuals: true });
 
 module.exports = mongoose.model('User', UserSchema);

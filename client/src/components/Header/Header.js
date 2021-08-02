@@ -7,7 +7,9 @@ import {
 	Grid,
 	IconButton,
 	Box,
+	Avatar,
 } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import CameraIcon from '@material-ui/icons/Camera';
 import { useHistory } from 'react-router-dom';
 
@@ -16,13 +18,12 @@ import { useStyles } from './styles';
 const Header = () => {
 	const classes = useStyles();
 
-	// const { user } = useSelector((state) => state.auth);
-	// console.log('HEADER ', user);
+	const { user } = useSelector((state) => state.auth);
 
 	const history = useHistory();
 	const handleClick = () => {
 		if (history.location.pathname !== '/') {
-			history.push('/');
+			history.push('/dashboard');
 		}
 	};
 
@@ -50,8 +51,8 @@ const Header = () => {
 						</IconButton>
 					</Box>
 					<Box className={classes.logo}>
-						<Button>Login</Button>
-						<Button>Home</Button>
+						<Avatar src={user.image}></Avatar>
+						<Button>{user.displayName}</Button>
 					</Box>
 				</Grid>
 			</Toolbar>
