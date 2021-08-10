@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const posts = 'http://localhost:5000/api/post';
 const images = 'http://localhost:5000/api/post/image';
+const users = 'http://localhost:5000/api/user';
 
 axios.defaults.withCredentials = true;
 
@@ -73,6 +74,15 @@ export const authUser = async (token) => {
 		);
 		const user = await response.json();
 		return user;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
+export const getUser = async (id) => {
+	try {
+		const res = await axios.get(users + '/' + id);
+		return res.data;
 	} catch (err) {
 		console.log(err.message);
 	}

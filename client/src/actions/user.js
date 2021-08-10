@@ -11,3 +11,15 @@ export const authUser = (token) => async (dispatch) => {
 		console.log(err);
 	}
 };
+
+export const getUser = (id) => async (dispatch) => {
+	try {
+		const user = await api.getUser(id);
+		dispatch({
+			type: 'GET_USER',
+			payload: user,
+		});
+	} catch (err) {
+		console.log(err);
+	}
+};
