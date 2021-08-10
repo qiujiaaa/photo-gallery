@@ -7,43 +7,22 @@ export const useStyles = makeStyles((theme) => ({
 		marginRight: '100px',
 		marginTop: '50px',
 	},
-	misc: {
-		marginTop: '50px',
-		display: 'flex',
-		alignItems: 'center',
-	},
-	form: {
+	profile: {
 		width: '100%',
 		display: 'flex',
 		flexDirection: 'column',
-		justifyContent: 'flex-start',
-		direction: 'column',
-	},
-	caption: {
-		flexGrow: 1,
-	},
-	preview: {
-		marginLeft: '20px',
-		fontStyle: 'italic',
-	},
-	previewBox: {
-		background: '#efb6b2',
-		height: 350,
-		width: 350,
-		borderRadius: 16,
-		opacity: 0.3,
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
 		alignItems: 'center',
+		direction: 'column',
+		paddingTop: '40px',
+		paddingBottom: '40px',
 	},
-	previewIcon: {
-		fontSize: 70,
-		opacity: 0.5,
+	dp: {
+		width: '100px',
+		height: '100px',
+		marginBottom: '20px',
 	},
-	previewPic: {
-		maxHeight: 350,
-		opacity: 1,
-		borderRadius: 16,
+	name: {
+		color: 'grey',
+		fontStyle: 'bold',
 	},
 }));
