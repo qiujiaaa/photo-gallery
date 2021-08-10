@@ -12,6 +12,7 @@ import Header from './components/Header/Header';
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
 import Post from './components/Post/Post';
+import User from './components/User/User';
 
 function App() {
 	const AuthenticatedRoute = ({ component: Component, ...rest }) => {
@@ -37,6 +38,9 @@ function App() {
 				</LoginRoute>
 				<AuthenticatedRoute path="/dashboard">
 					<Dashboard />
+				</AuthenticatedRoute>
+				<AuthenticatedRoute path="/user/:id">
+					<User />
 				</AuthenticatedRoute>
 				<AuthenticatedRoute path="/post/:id">
 					<Post />

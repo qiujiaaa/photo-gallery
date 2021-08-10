@@ -45,7 +45,7 @@ const Post = ({ post }) => {
 				</Typography>
 			</CardContent>
 			<CardActions className={classes.actions}>
-				<Button size="small">Author name</Button>
+				<Button size="small">{post.name}</Button>
 				<IconButton aria-label="add to favorites">
 					<FavoriteIcon />
 				</IconButton>

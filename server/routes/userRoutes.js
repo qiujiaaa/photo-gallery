@@ -1,8 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
-const { getMyProfile } = require('../controllers/userController');
+const { getDp } = require('../controllers/userController');
 
-router.get('/', getMyProfile);
+router.get('/displaypic/:id', getDp);
 
 module.exports = router;

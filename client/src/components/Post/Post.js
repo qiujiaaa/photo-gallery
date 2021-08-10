@@ -63,7 +63,7 @@ const Post = () => {
 	const handleDelete = () => {
 		dispatch(deletePost(post._id));
 		setAnchorEl(null);
-		history.replace('/');
+		history.replace('/dashboard');
 	};
 
 	const handleEdit = () => {
@@ -138,13 +138,16 @@ const Post = () => {
 								elevation={1}
 								className={classes.profile}
 							>
-								<Avatar variant="rounded">A</Avatar>
+								<Avatar
+									variant="rounded"
+									src={`/api/user/displaypic/${post.userId}`}
+								></Avatar>
 								<Typography
 									component="div"
 									className={classes.username}
 								>
 									<Box fontWeight={500} m={1}>
-										Bob the Builder
+										{post.name}
 									</Box>
 								</Typography>
 							</Paper>

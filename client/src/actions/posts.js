@@ -28,7 +28,7 @@ export const getPost = (id) => async (dispatch) => {
 };
 
 export const createPost =
-	({ title, caption, file }) =>
+	({ title, caption, file, user }) =>
 	async (dispatch) => {
 		try {
 			// first add image
@@ -36,7 +36,14 @@ export const createPost =
 			formData.append('file', file);
 			const data = await api.createImage(formData);
 			const img = data.data;
-			const post = await api.createPost({ title, caption, img });
+			const { displayName: name, _id: userId } = user;
+			const post = await api.createPost({
+				title,
+				caption,
+				img,
+				name,
+				userId,
+			});
 			dispatch({
 				type: 'CREATE',
 				payload: post,

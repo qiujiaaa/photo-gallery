@@ -13,6 +13,14 @@ const postSchema = new mongoose.Schema({
 	img: {
 		type: mongoose.Schema.ObjectId,
 	},
+	name: {
+		type: String,
+		require: true,
+	},
+	userId: {
+		type: mongoose.ObjectId,
+		require: true,
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now(),

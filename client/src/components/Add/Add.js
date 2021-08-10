@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Grid, Box, Typography } from '@material-ui/core';
 import PhotoIcon from '@material-ui/icons/Photo';
 import { useHistory } from 'react-router-dom';
@@ -20,6 +20,8 @@ const Add = () => {
 
 	const history = useHistory();
 
+	const { user } = useSelector((state) => state.auth);
+
 	const fileChangeHandler = (e) => {
 		const types = ['image/png', 'image/jpeg'];
 
@@ -38,12 +40,12 @@ const Add = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(createPost({ title, caption, file }));
+		dispatch(createPost({ title, caption, file, user }));
 
 		setTitle('');
 		setCaption('');
 		setFile(null);
-		history.push('/');
+		history.push('/dashboard');
 	};
 
 	return (

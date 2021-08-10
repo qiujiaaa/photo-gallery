@@ -22,9 +22,13 @@ const Header = () => {
 
 	const history = useHistory();
 	const handleClick = () => {
-		if (history.location.pathname !== '/') {
+		if (history.location.pathname !== '/dashboard') {
 			history.push('/dashboard');
 		}
+	};
+
+	const goProfile = () => {
+		history.push(`/user/${user._id}`);
 	};
 
 	return (
@@ -51,7 +55,10 @@ const Header = () => {
 						</IconButton>
 					</Box>
 					{isAuth && (
-						<Box className={classes.logo}>
+						<Box
+							className={classes.logo}
+							onClick={() => goProfile()}
+						>
 							<Avatar src={user.image}></Avatar>
 							<Button>{user.displayName}</Button>
 						</Box>
