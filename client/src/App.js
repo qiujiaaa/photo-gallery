@@ -12,7 +12,7 @@ import Header from './components/Header/Header';
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
 import Post from './components/Post/Post';
-import User from './components/User/User';
+import Profile from './components/Profile/Profile';
 
 function App() {
 	const AuthenticatedRoute = ({ component: Component, ...rest }) => {
@@ -40,7 +40,7 @@ function App() {
 					<Dashboard />
 				</AuthenticatedRoute>
 				<AuthenticatedRoute path="/user/:id">
-					<User />
+					<Profile />
 				</AuthenticatedRoute>
 				<AuthenticatedRoute path="/post/:id">
 					<Post />
