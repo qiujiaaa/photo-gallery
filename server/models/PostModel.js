@@ -13,11 +13,15 @@ const postSchema = new mongoose.Schema({
 	img: {
 		type: mongoose.Schema.ObjectId,
 	},
-	name: {
+	likes: {
+		type: Number,
+		require: true,
+	},
+	author: {
 		type: String,
 		require: true,
 	},
-	userId: {
+	authorId: {
 		type: mongoose.ObjectId,
 		require: true,
 	},

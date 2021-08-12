@@ -22,7 +22,7 @@ const Profile = () => {
 	let viewedUser = useSelector((state) => state.user);
 	let posts = useSelector((state) => state.posts);
 	posts = posts
-		.filter((x) => x.userId === id)
+		.filter((x) => x.authorId === id)
 		.sort((x, y) => (x.createdAt > y.createdAt ? 1 : -1));
 
 	useEffect(() => {
@@ -99,7 +99,7 @@ const Profile = () => {
 									</Grid>
 								);
 							})}
-						{!posts && (
+						{posts.length === 0 && (
 							<Typography>This user has no posts.</Typography>
 						)}
 					</Grid>

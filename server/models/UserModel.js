@@ -23,12 +23,16 @@ const UserSchema = new mongoose.Schema({
 	token: {
 		type: String,
 	},
+	likes: {
+		type: [],
+	},
+	bookmarks: {
+		type: [],
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now,
 	},
 });
-
-//UserSchema.set('toJSON', { getters: true, virtuals: true });
 
 module.exports = mongoose.model('User', UserSchema);

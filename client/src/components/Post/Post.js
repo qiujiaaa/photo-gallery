@@ -15,7 +15,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ShareIcon from '@material-ui/icons/Share';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
@@ -33,7 +32,7 @@ const Post = () => {
 
 	let posts = useSelector((state) => state.posts);
 	let post = posts.find((x) => x._id === id);
-	let viewedUser = useSelector((state) => state.user);
+	let author = useSelector((state) => state.user);
 	let user = useSelector((state) => state.auth.user);
 
 	useEffect(() => {
@@ -69,7 +68,7 @@ const Post = () => {
 	};
 
 	const goUser = () => {
-		history.push(`/user/${post.userId}`);
+		history.push(`/user/${post.authorId}`);
 	};
 
 	return (
@@ -97,7 +96,7 @@ const Post = () => {
 										<BookmarkIcon />
 									</IconButton>
 
-									{user._id === post.userId && (
+									{user._id === post.authorId && (
 										<IconButton
 											aria-controls="fade-menu"
 											aria-haspopup="true"
@@ -147,14 +146,14 @@ const Post = () => {
 							>
 								<Avatar
 									variant="rounded"
-									src={viewedUser.image}
+									src={author.image}
 								></Avatar>
 								<Typography
 									component="div"
 									className={classes.username}
 								>
 									<Box fontWeight={500} m={1}>
-										{post.name}
+										{post.author}
 									</Box>
 								</Typography>
 							</Paper>

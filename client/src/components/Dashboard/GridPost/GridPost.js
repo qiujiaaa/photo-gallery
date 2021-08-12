@@ -25,7 +25,7 @@ const Post = ({ post }) => {
 	};
 
 	const goUser = () => {
-		history.push(`/user/${post.userId}`);
+		history.push(`/user/${post.authorId}`);
 	};
 
 	return (
@@ -51,7 +51,7 @@ const Post = ({ post }) => {
 					onClick={() => goUser()}
 					size="small"
 				>
-					{post.name}
+					{post.author}
 				</Button>
 				<IconButton aria-label="add to favorites">
 					<FavoriteIcon className={classes.like} />

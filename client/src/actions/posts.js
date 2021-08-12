@@ -41,13 +41,15 @@ export const createPost =
 			formData.append('file', file);
 			const data = await api.createImage(formData);
 			const img = data.data;
-			const { displayName: name, _id: userId } = user;
+			const { displayName: author, _id: authorId } = user;
+			const likes = 0;
 			const post = await api.createPost({
 				title,
 				caption,
 				img,
-				name,
-				userId,
+				author,
+				authorId,
+				likes,
 			});
 			dispatch({
 				type: 'CREATE',
