@@ -33,6 +33,8 @@ const Post = () => {
 
 	let posts = useSelector((state) => state.posts);
 	let post = posts.find((x) => x._id === id);
+	let viewedUser = useSelector((state) => state.user);
+	let user = useSelector((state) => state.auth.user);
 
 	useEffect(() => {
 		dispatch(getPost(id));
@@ -53,10 +55,6 @@ const Post = () => {
 	};
 
 	const handleClose = () => {
-		setAnchorEl(null);
-	};
-
-	const handleShare = () => {
 		setAnchorEl(null);
 	};
 
@@ -98,14 +96,18 @@ const Post = () => {
 									>
 										<BookmarkIcon />
 									</IconButton>
-									<IconButton
-										aria-controls="fade-menu"
-										aria-haspopup="true"
-										onClick={handleClick}
-										className={classes.more}
-									>
-										<MoreVertIcon />
-									</IconButton>
+
+									{user._id === post.userId && (
+										<IconButton
+											aria-controls="fade-menu"
+											aria-haspopup="true"
+											onClick={handleClick}
+											className={classes.more}
+										>
+											<MoreVertIcon />
+										</IconButton>
+									)}
+
 									<Menu
 										id="fade-menu"
 										anchorEl={anchorEl}
@@ -114,21 +116,21 @@ const Post = () => {
 										onClose={handleClose}
 										TransitionComponent={Fade}
 									>
-										<MenuItem onClick={handleShare}>
-											<ShareIcon
-												className={classes.list}
-											/>
-											Share
-										</MenuItem>
-										<MenuItem onClick={handleEdit}>
+										<MenuItem
+											className={classes.list}
+											onClick={handleEdit}
+										>
 											<EditIcon
-												className={classes.list}
+												className={classes.listLabel}
 											/>
 											Edit
 										</MenuItem>
-										<MenuItem onClick={handleDelete}>
+										<MenuItem
+											onClick={handleDelete}
+											className={classes.list}
+										>
 											<DeleteIcon
-												className={classes.list}
+												className={classes.listLabel}
 											/>
 											Delete
 										</MenuItem>
@@ -145,7 +147,7 @@ const Post = () => {
 							>
 								<Avatar
 									variant="rounded"
-									src={`/api/user/displaypic/${post.userId}`}
+									src={viewedUser.image}
 								></Avatar>
 								<Typography
 									component="div"

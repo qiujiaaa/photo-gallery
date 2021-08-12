@@ -38,10 +38,12 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	more: { marginLeft: 'auto' },
 	list: {
-		marginRight: '10px',
 		'&:hover': {
 			color: '#efb6b2',
 		},
+	},
+	listLabel: {
+		marginRight: '10px',
 	},
 	like: {
 		'&:hover': {

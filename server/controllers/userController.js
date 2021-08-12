@@ -9,7 +9,7 @@ const getDp = async (req, res) => {
 		const response = await axios.get(user.image, {
 			responseType: 'stream',
 		});
-		res.status(200).send(response);
+		res.status(200).send(user.image);
 	} catch (err) {
 		res.status(500).json({ message: err.message });
 	}

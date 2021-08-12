@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
 		display: 'inline-block',
 		'&:hover': {
 			cursor: 'pointer',
+			opacity: 0.9,
 		},
 	},
 	cardmedia: {
@@ -13,5 +14,17 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	actions: {
 		justifyContent: 'space-between',
+		marginLeft: '5px',
+	},
+	like: {
+		color: 'grey',
+		'&:hover': {
+			color: '#ff4833',
+		},
+	},
+	user: {
+		'&:hover': {
+			color: '#6897bb',
+		},
 	},
 }));

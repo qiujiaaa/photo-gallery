@@ -46,11 +46,15 @@ const Post = ({ post }) => {
 				</Typography>
 			</CardContent>
 			<CardActions className={classes.actions}>
-				<Button onClick={() => goUser()} size="small">
+				<Button
+					className={classes.user}
+					onClick={() => goUser()}
+					size="small"
+				>
 					{post.name}
 				</Button>
 				<IconButton aria-label="add to favorites">
-					<FavoriteIcon />
+					<FavoriteIcon className={classes.like} />
 				</IconButton>
 			</CardActions>
 		</Card>
