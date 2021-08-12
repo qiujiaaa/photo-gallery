@@ -70,6 +70,10 @@ const Post = () => {
 		setAnchorEl(null);
 	};
 
+	const goUser = () => {
+		history.push(`/user/${post.userId}`);
+	};
+
 	return (
 		<div className={classes.root}>
 			{post && (
@@ -137,6 +141,7 @@ const Post = () => {
 								variant="outlined"
 								elevation={1}
 								className={classes.profile}
+								onClick={() => goUser()}
 							>
 								<Avatar
 									variant="rounded"

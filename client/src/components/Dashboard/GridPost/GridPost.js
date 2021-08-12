@@ -24,19 +24,20 @@ const Post = ({ post }) => {
 		history.push(`/post/${post._id}`);
 	};
 
+	const goUser = () => {
+		history.push(`/user/${post.userId}`);
+	};
+
 	return (
-		<Card
-			variant="elevation"
-			className={classes.card}
-			onClick={() => goIndividual()}
-		>
+		<Card variant="elevation" className={classes.card}>
 			<CardMedia
 				className={classes.cardmedia}
 				image={`/api/post/image/${post.img}`}
 				title={title}
 				component="img"
+				onClick={() => goIndividual()}
 			/>
-			<CardContent>
+			<CardContent onClick={() => goIndividual()}>
 				<Typography gutterBottom variant="h5" component="div">
 					{title}
 				</Typography>
@@ -45,7 +46,9 @@ const Post = ({ post }) => {
 				</Typography>
 			</CardContent>
 			<CardActions className={classes.actions}>
-				<Button size="small">{post.name}</Button>
+				<Button onClick={() => goUser()} size="small">
+					{post.name}
+				</Button>
 				<IconButton aria-label="add to favorites">
 					<FavoriteIcon />
 				</IconButton>
