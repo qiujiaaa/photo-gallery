@@ -38,7 +38,6 @@ export const createImage = async (image) => {
 export const createPost = async (post) => {
 	try {
 		const res = await axios.post(posts, post);
-		console.log(res.data);
 		return res.data;
 	} catch (err) {
 		console.log(err.message);
@@ -48,8 +47,21 @@ export const createPost = async (post) => {
 export const deletePost = async (id) => {
 	try {
 		const res = await axios.delete(posts + '/' + id);
-		console.log(res.data);
 		return id;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
+export const likePost = async ({ postId, userId }) => {
+	try {
+		const res = await axios.put(
+			posts + '/like/' + postId,
+			{},
+			{ params: { userId } }
+		);
+		// console.log(res.data);
+		return res.data;
 	} catch (err) {
 		console.log(err.message);
 	}

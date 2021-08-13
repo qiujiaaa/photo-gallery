@@ -80,4 +80,30 @@ const deletePost = async (req, res) => {
 	}
 };
 
-module.exports = { getPosts, getPost, addImage, addPost, getImage, deletePost };
+const likePost = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { userId } = req.query;
+
+		const post = await Post.findById(id);
+		const updatedPostLikes = post.likes + 1;
+		const updatedPost = await Post.findOneAndUpdate(
+			{ _id: id },
+			{ likes: updatedPostLikes },
+			{ new: true }
+		);
+		res.status(200).send(updatedPost);
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
+};
+
+module.exports = {
+	getPosts,
+	getPost,
+	addImage,
+	addPost,
+	getImage,
+	deletePost,
+	likePost,
+};
