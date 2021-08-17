@@ -70,7 +70,6 @@ const addPost = async (req, res) => {
 const deletePost = async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.id);
-		console.log(post);
 		await gfs.files.deleteOne({
 			_id: new mongoose.mongo.ObjectId(post.img),
 		});

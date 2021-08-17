@@ -9,6 +9,12 @@ import {
 	Paper,
 	Avatar,
 	Box,
+	Dialog,
+	DialogContent,
+	DialogTitle,
+	DialogContentText,
+	DialogActions,
+	Button,
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -29,6 +35,7 @@ const Post = () => {
 	const dispatch = useDispatch();
 
 	const [fetched, setFetched] = useState(false);
+	const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
 	let posts = useSelector((state) => state.posts);
 	let post = posts.find((x) => x._id === id);
@@ -77,6 +84,14 @@ const Post = () => {
 
 	const handleEdit = () => {
 		setAnchorEl(null);
+	};
+
+	const handleOpenConfirmDelete = () => {
+		setOpenConfirmDelete(true);
+	};
+
+	const handleCloseConfirmDelete = () => {
+		setOpenConfirmDelete(false);
 	};
 
 	const goUser = () => {
@@ -146,7 +161,7 @@ const Post = () => {
 											Edit
 										</MenuItem>
 										<MenuItem
-											onClick={handleDelete}
+											onClick={handleOpenConfirmDelete}
 											className={classes.list}
 										>
 											<DeleteIcon
@@ -154,6 +169,43 @@ const Post = () => {
 											/>
 											Delete
 										</MenuItem>
+										<Dialog
+											open={openConfirmDelete}
+											onClose={handleCloseConfirmDelete}
+											aria-labelledby="alert-dialog-title"
+											aria-describedby="alert-dialog-description"
+										>
+											<DialogTitle id="alert-dialog-title">
+												{
+													'Do you want to delete this post?'
+												}
+											</DialogTitle>
+											<DialogContent>
+												<DialogContentText id="alert-dialog-description">
+													Once this post is deleted,
+													it can no longer be accessed
+													and will be removed from
+													your profile page.
+												</DialogContentText>
+											</DialogContent>
+											<DialogActions>
+												<Button
+													onClick={handleDelete}
+													color="primary"
+												>
+													Delete
+												</Button>
+												<Button
+													onClick={
+														handleCloseConfirmDelete
+													}
+													color="primary"
+													autoFocus
+												>
+													Cancel
+												</Button>
+											</DialogActions>
+										</Dialog>
 									</Menu>
 								</Grid>
 							</Paper>

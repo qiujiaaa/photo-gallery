@@ -21,7 +21,8 @@ export const getPost = (id) => async (dispatch) => {
 			type: 'UPDATE',
 			payload: data,
 		});
-		const user = await api.getUser(data.userId);
+		console.log(data);
+		const user = await api.getUser(data.authorId);
 		dispatch({
 			type: 'GET_USER',
 			payload: user,
