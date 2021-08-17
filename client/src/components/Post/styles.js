@@ -46,8 +46,17 @@ export const useStyles = makeStyles((theme) => ({
 		marginRight: '10px',
 	},
 	like: {
+		marginLeft: '5px',
+		color: 'grey',
 		'&:hover': {
 			color: '#ff4833',
+		},
+	},
+	unlike: {
+		marginLeft: '5px',
+		color: '#ff4833',
+		'&:hover': {
+			color: 'grey',
 		},
 	},
 	save: {

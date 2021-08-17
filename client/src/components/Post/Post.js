@@ -19,7 +19,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
-import { getPost, deletePost } from '../../actions/posts';
+import { getPost, deletePost, likePost, unlikePost } from '../../actions/posts';
 import { POST_NOT_FOUND } from '../../constants/error';
 import { formatDate } from '../../utils/dateUtil';
 
@@ -34,6 +34,8 @@ const Post = () => {
 	let post = posts.find((x) => x._id === id);
 	let author = useSelector((state) => state.user);
 	let user = useSelector((state) => state.auth.user);
+
+	const [liked, setLiked] = useState(user.likes.indexOf(post._id) >= 0);
 
 	useEffect(() => {
 		dispatch(getPost(id));
@@ -63,6 +65,16 @@ const Post = () => {
 		history.replace('/dashboard');
 	};
 
+	const handleLike = () => {
+		if (!liked) {
+			dispatch(likePost({ postId: post._id, userId: user._id }));
+			setLiked(true);
+		} else {
+			dispatch(unlikePost({ postId: post._id, userId: user._id }));
+			setLiked(false);
+		}
+	};
+
 	const handleEdit = () => {
 		setAnchorEl(null);
 	};
@@ -86,9 +98,18 @@ const Post = () => {
 									<IconButton
 										className={classes.like}
 										aria-label="add to favorites"
+										onClick={() => handleLike()}
 									>
-										<FavoriteIcon />
+										<Typography>{post.likes}</Typography>
+										<FavoriteIcon
+											className={
+												liked
+													? classes.unlike
+													: classes.like
+											}
+										/>
 									</IconButton>
+
 									<IconButton
 										className={classes.save}
 										aria-label="save"
