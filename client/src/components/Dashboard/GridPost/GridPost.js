@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useStyles } from './styles';
 import { previewCaption } from '../../../utils/captionUtil';
-import { likePost } from '../../../actions/posts';
+import { likePost, unlikePost } from '../../../actions/posts';
 
 const Post = ({ post }) => {
 	const { title, caption } = post;
@@ -39,6 +39,7 @@ const Post = ({ post }) => {
 			dispatch(likePost({ postId: post._id, userId: user._id }));
 			setLiked(true);
 		} else {
+			dispatch(unlikePost({ postId: post._id, userId: user._id }));
 			setLiked(false);
 		}
 	};

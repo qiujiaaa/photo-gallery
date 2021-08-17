@@ -99,7 +99,35 @@ const likePost = async (req, res) => {
 		const updatedLikes = [...new Set(user.likes)];
 		const updatedUser = await User.findOneAndUpdate(
 			{ _id: userId },
-			{ likes: updatedLikes }
+			{ likes: updatedLikes },
+			{ new: true }
+		);
+
+		res.status(200).send({ post: updatedPost, user: updatedUser });
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
+};
+
+const unlikePost = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { userId } = req.query;
+
+		const post = await Post.findById(id);
+		const updatedPostLikes = post.likes - 1;
+		const updatedPost = await Post.findOneAndUpdate(
+			{ _id: id },
+			{ likes: updatedPostLikes },
+			{ new: true }
+		);
+
+		const user = await User.findById(userId);
+		const updatedLikes = user.likes.filter((e) => e !== id);
+		const updatedUser = await User.findOneAndUpdate(
+			{ _id: userId },
+			{ likes: updatedLikes },
+			{ new: true }
 		);
 
 		res.status(200).send({ post: updatedPost, user: updatedUser });
@@ -116,4 +144,5 @@ module.exports = {
 	getImage,
 	deletePost,
 	likePost,
+	unlikePost,
 };

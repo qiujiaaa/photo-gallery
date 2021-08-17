@@ -66,6 +66,19 @@ export const likePost = async ({ postId, userId }) => {
 	}
 };
 
+export const unlikePost = async ({ postId, userId }) => {
+	try {
+		const res = await axios.put(
+			posts + '/unlike/' + postId,
+			{},
+			{ params: { userId } }
+		);
+		return res.data;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
 export const authUser = async (token) => {
 	try {
 		const tokenBlob = new Blob(

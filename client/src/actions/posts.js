@@ -88,3 +88,21 @@ export const likePost =
 			console.log(err);
 		}
 	};
+
+export const unlikePost =
+	({ postId, userId }) =>
+	async (dispatch) => {
+		try {
+			const { post, user } = await api.unlikePost({ postId, userId });
+			dispatch({
+				type: 'UPDATE_POST',
+				payload: post,
+			});
+			dispatch({
+				type: 'UPDATE_USER',
+				payload: user,
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
