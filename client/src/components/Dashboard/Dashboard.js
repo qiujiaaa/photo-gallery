@@ -11,12 +11,12 @@ import { useStyles } from './styles';
 const Dashboard = () => {
 	const dispatch = useDispatch();
 
+	let posts = useSelector((state) => state.posts);
+	posts.sort((x, y) => (x.createdAt < y.createdAt ? 1 : -1));
+
 	useEffect(() => {
 		dispatch(getPosts());
 	}, [dispatch]);
-
-	let posts = useSelector((state) => state.posts);
-	posts.sort((x, y) => (x.createdAt < y.createdAt ? 1 : -1));
 
 	const classes = useStyles();
 

@@ -60,7 +60,6 @@ export const likePost = async ({ postId, userId }) => {
 			{},
 			{ params: { userId } }
 		);
-		// console.log(res.data);
 		return res.data;
 	} catch (err) {
 		console.log(err.message);

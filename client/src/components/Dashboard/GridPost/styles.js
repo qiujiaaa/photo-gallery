@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
 		marginLeft: '5px',
 	},
 	like: {
+		marginLeft: '5px',
 		color: 'grey',
 		'&:hover': {
 			color: '#ff4833',

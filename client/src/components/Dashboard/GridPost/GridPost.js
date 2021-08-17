@@ -66,6 +66,7 @@ const Post = ({ post }) => {
 					onClick={() => handleLike()}
 					aria-label="add to favorites"
 				>
+					<Typography>{post.likes}</Typography>
 					<FavoriteIcon className={classes.like} />
 				</IconButton>
 			</CardActions>

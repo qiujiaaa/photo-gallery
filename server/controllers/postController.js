@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 
 const Post = require('../models/PostModel');
+const User = require('../models/UserModel');
 const upload = require('../middleware/upload');
 
 let gfs;
@@ -92,7 +93,16 @@ const likePost = async (req, res) => {
 			{ likes: updatedPostLikes },
 			{ new: true }
 		);
-		res.status(200).send(updatedPost);
+
+		const user = await User.findById(userId);
+		user.likes.push(id);
+		const updatedLikes = [...new Set(user.likes)];
+		const updatedUser = await User.findOneAndUpdate(
+			{ _id: userId },
+			{ likes: updatedLikes }
+		);
+
+		res.status(200).send({ post: updatedPost, user: updatedUser });
 	} catch (err) {
 		res.status(404).json({ message: err.message });
 	}

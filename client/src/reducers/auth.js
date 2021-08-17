@@ -5,6 +5,11 @@ const reducer = (auth = { isAuth: false, user: {} }, action) => {
 				user: action.payload,
 				isAuth: true,
 			};
+		case 'UPDATE_USER':
+			return {
+				user: action.payload,
+				isAuth: true,
+			};
 		default:
 			return auth;
 	}

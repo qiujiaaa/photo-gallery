@@ -76,10 +76,14 @@ export const likePost =
 	({ postId, userId }) =>
 	async (dispatch) => {
 		try {
-			const post = await api.likePost({ postId, userId });
+			const { post, user } = await api.likePost({ postId, userId });
 			dispatch({
-				type: 'UPDATE',
+				type: 'UPDATE_POST',
 				payload: post,
+			});
+			dispatch({
+				type: 'UPDATE_USER',
+				payload: user,
 			});
 		} catch (err) {
 			console.log(err);

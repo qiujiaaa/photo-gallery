@@ -4,16 +4,20 @@ const reducer = (posts = [], action) => {
 			return action.payload;
 		case 'CREATE':
 			return [...posts, action.payload];
-		case 'UPDATE':
+		case 'UPDATE_POST':
 			if (posts.some((x) => x._id === action.payload._id)) {
-				return posts.map((post) =>
-					post._id === action.payload._id ? action.payload : post
-				);
+				return posts
+					.sort((x, y) => (x.createdAt < y.createdAt ? 1 : -1))
+					.map((post) =>
+						post._id === action.payload._id ? action.payload : post
+					);
 			} else {
 				return [...posts, action.payload];
 			}
 		case 'DELETE':
-			return posts.filter((x) => x._id !== action.payload);
+			return posts
+				.sort((x, y) => (x.createdAt < y.createdAt ? 1 : -1))
+				.filter((x) => x._id !== action.payload);
 		default:
 			return posts;
 	}
