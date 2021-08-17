@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography, Grid, Paper, Avatar } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Post from '../Dashboard/GridPost/GridPost';
 import { useStyles } from './styles';
 import { getUser } from '../../actions/user';
 import { getPosts } from '../../actions/posts';

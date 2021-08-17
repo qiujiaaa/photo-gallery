@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Card,
 	CardMedia,
@@ -24,6 +24,7 @@ const Post = ({ post }) => {
 	const dispatch = useDispatch();
 
 	let user = useSelector((state) => state.auth.user);
+	const [liked, setLiked] = useState(user.likes.indexOf(post._id) >= 0);
 
 	const goIndividual = () => {
 		history.push(`/post/${post._id}`);
@@ -34,7 +35,12 @@ const Post = ({ post }) => {
 	};
 
 	const handleLike = () => {
-		dispatch(likePost({ postId: post._id, userId: user._id }));
+		if (!liked) {
+			dispatch(likePost({ postId: post._id, userId: user._id }));
+			setLiked(true);
+		} else {
+			setLiked(false);
+		}
 	};
 
 	return (
@@ -67,7 +73,9 @@ const Post = ({ post }) => {
 					aria-label="add to favorites"
 				>
 					<Typography>{post.likes}</Typography>
-					<FavoriteIcon className={classes.like} />
+					<FavoriteIcon
+						className={liked ? classes.unlike : classes.like}
+					/>
 				</IconButton>
 			</CardActions>
 		</Card>

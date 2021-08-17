@@ -23,6 +23,13 @@ export const useStyles = makeStyles((theme) => ({
 			color: '#ff4833',
 		},
 	},
+	unlike: {
+		marginLeft: '5px',
+		color: '#ff4833',
+		'&:hover': {
+			color: 'grey',
+		},
+	},
 	user: {
 		'&:hover': {
 			color: '#6897bb',

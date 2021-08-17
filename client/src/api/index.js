@@ -46,7 +46,7 @@ export const createPost = async (post) => {
 
 export const deletePost = async (id) => {
 	try {
-		const res = await axios.delete(posts + '/' + id);
+		await axios.delete(posts + '/' + id);
 		return id;
 	} catch (err) {
 		console.log(err.message);

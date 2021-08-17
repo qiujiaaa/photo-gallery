@@ -16,7 +16,8 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		dispatch(getPosts());
-	}, [dispatch]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const classes = useStyles();
 
