@@ -23,6 +23,10 @@ const Profile = () => {
 	posts = posts
 		.filter((x) => x.authorId === id)
 		.sort((x, y) => (x.createdAt > y.createdAt ? 1 : -1));
+	let likes = 0;
+	posts.forEach((post) => {
+		likes += post.likes;
+	});
 
 	useEffect(() => {
 		dispatch(getUser(id));
@@ -71,7 +75,7 @@ const Profile = () => {
 									></Grid>
 									<Grid item className={classes.stat}>
 										<Typography className={classes.number}>
-											<Box fontSize={22}>90</Box>
+											<Box fontSize={22}>{likes}</Box>
 										</Typography>
 										<Typography className={classes.label}>
 											<Box fontSize={12}>likes</Box>
