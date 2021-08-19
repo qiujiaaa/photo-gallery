@@ -13,6 +13,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
 import Post from './components/Post/Post';
 import Profile from './components/Profile/Profile';
+import EditPost from './components/EditPost/EditPost';
 
 function App() {
 	const AuthenticatedRoute = ({ component: Component, ...rest }) => {
@@ -41,6 +42,9 @@ function App() {
 				</AuthenticatedRoute>
 				<AuthenticatedRoute path="/user/:id">
 					<Profile />
+				</AuthenticatedRoute>
+				<AuthenticatedRoute path="/post/edit/:id">
+					<EditPost />
 				</AuthenticatedRoute>
 				<AuthenticatedRoute path="/post/:id">
 					<Post />

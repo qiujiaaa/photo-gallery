@@ -84,6 +84,7 @@ const Post = () => {
 
 	const handleEdit = () => {
 		setAnchorEl(null);
+		history.push(`/post/edit/${post._id}`);
 	};
 
 	const handleOpenConfirmDelete = () => {
