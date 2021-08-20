@@ -1,8 +1,9 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+
 const { generateToken, sendToken } = require('../utils/token');
-//const { redirectDashboard } = require('../controllers/authController');
+const { checkAuth } = require('../controllers/authController');
 
 router.post(
 	'/google',
@@ -20,5 +21,7 @@ router.post(
 	generateToken,
 	sendToken
 );
+
+router.get('/check', checkAuth);
 
 module.exports = router;

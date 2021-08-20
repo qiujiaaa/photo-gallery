@@ -146,7 +146,6 @@ const editPost = async (req, res) => {
 		);
 		res.status(200).send(updatedPost);
 	} catch (err) {
-		console.log(err);
 		res.status(404).json({ message: err.message });
 	}
 };

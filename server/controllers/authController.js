@@ -1,7 +1,11 @@
 const Post = require('../models/PostModel');
 
-const redirectDashboard = (req, res) => {
-	res.redirect(301, '/dashboard');
+const checkAuth = (req, res) => {
+	try {
+		console.log(req.cookies);
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
 };
 
-module.exports = { redirectDashboard };
+module.exports = { checkAuth };

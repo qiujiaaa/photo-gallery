@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const posts = 'http://localhost:5000/api/post';
+const auth = 'http://localhost:5000/auth';
 const images = 'http://localhost:5000/api/post/image';
 const users = 'http://localhost:5000/api/user';
 
@@ -116,6 +117,15 @@ export const authUser = async (token) => {
 		);
 		const user = await response.json();
 		return user;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
+export const checkAuth = async () => {
+	try {
+		const res = await axios.get(auth + '/check');
+		return res.data;
 	} catch (err) {
 		console.log(err.message);
 	}
