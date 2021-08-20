@@ -243,7 +243,9 @@ const Post = () => {
 							</Typography>
 							<Grid container className={classes.line}></Grid>
 							<Grid className={classes.caption} container>
-								<Typography>{post.caption}</Typography>
+								{post.caption.split('\n').map((str) => (
+									<Typography>{str}</Typography>
+								))}
 							</Grid>
 						</Grid>
 					</Grid>

@@ -4,7 +4,7 @@ import { Button, TextField, Grid, Box } from '@material-ui/core';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { useStyles } from './styles';
-import { getPost } from '../../actions/posts';
+import { getPost, editPost } from '../../actions/posts';
 import { POST_NOT_FOUND } from '../../constants/error';
 
 const EditPost = () => {
@@ -33,11 +33,8 @@ const EditPost = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		//dispatch(createPost({ title, caption, file, user }));
-
-		setTitle('');
-		setCaption('');
-		history.push('/dashboard');
+		dispatch(editPost({ id, title, caption }));
+		history.push(`/post/${post._id}`);
 	};
 
 	const handleCancel = () => {

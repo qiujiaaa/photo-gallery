@@ -135,6 +135,22 @@ const unlikePost = async (req, res) => {
 	}
 };
 
+const editPost = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { title, caption } = req.query;
+		const updatedPost = await Post.findOneAndUpdate(
+			{ _id: id },
+			{ title: title, caption: caption },
+			{ new: true }
+		);
+		res.status(200).send(updatedPost);
+	} catch (err) {
+		console.log(err);
+		res.status(404).json({ message: err.message });
+	}
+};
+
 module.exports = {
 	getPosts,
 	getPost,
@@ -144,4 +160,5 @@ module.exports = {
 	deletePost,
 	likePost,
 	unlikePost,
+	editPost,
 };

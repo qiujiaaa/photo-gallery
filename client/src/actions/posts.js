@@ -106,3 +106,17 @@ export const unlikePost =
 			console.log(err);
 		}
 	};
+
+export const editPost =
+	({ id, title, caption }) =>
+	async (dispatch) => {
+		try {
+			const post = await api.editPost({ id, title, caption });
+			dispatch({
+				type: 'UPDATE_POST',
+				payload: post,
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};

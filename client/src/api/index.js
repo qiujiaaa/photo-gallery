@@ -79,6 +79,24 @@ export const unlikePost = async ({ postId, userId }) => {
 	}
 };
 
+export const editPost = async ({ id, title, caption }) => {
+	try {
+		const res = await axios.put(
+			posts + '/edit/' + id,
+			{},
+			{
+				params: {
+					title,
+					caption,
+				},
+			}
+		);
+		return res.data;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
 export const authUser = async (token) => {
 	try {
 		const tokenBlob = new Blob(
