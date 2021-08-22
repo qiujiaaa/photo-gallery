@@ -39,6 +39,7 @@ const Profile = () => {
 
 	const classes = useStyles();
 
+	let user = useSelector((state) => state.auth.user);
 	let viewedUser = useSelector((state) => state.user);
 	let posts = useSelector((state) => state.posts);
 	posts = posts
@@ -130,7 +131,7 @@ const Profile = () => {
 											className={classes.likeicon}
 										/>
 									</ListItemIcon>
-									<ListItemText primary="My Likes" />
+									<ListItemText primary="Likes" />
 								</ListItem>
 								<Divider />
 								<ListItem button className={classes.bookmarks}>
@@ -139,21 +140,24 @@ const Profile = () => {
 											className={classes.bookmarkicon}
 										/>
 									</ListItemIcon>
-									<ListItemText primary="My Bookmarks" />
+									<ListItemText primary="Bookmarks" />
 								</ListItem>
 								<Divider />
-								<ListItem
-									onClick={handleOpenConfirmLogout}
-									button
-									className={classes.logout}
-								>
-									<ListItemIcon>
-										<ExitToAppIcon
-											className={classes.logouticon}
-										/>
-									</ListItemIcon>
-									<ListItemText primary="Logout" />
-								</ListItem>
+								{user._id === viewedUser._id && (
+									<ListItem
+										onClick={handleOpenConfirmLogout}
+										button
+										className={classes.logout}
+									>
+										<ListItemIcon>
+											<ExitToAppIcon
+												className={classes.logouticon}
+											/>
+										</ListItemIcon>
+										<ListItemText primary="Logout" />
+									</ListItem>
+								)}
+
 								<Dialog
 									open={openConfirmLogout}
 									onClose={handleCloseConfirmLogout}
