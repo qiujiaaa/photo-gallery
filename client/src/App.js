@@ -19,6 +19,7 @@ import { checkAuth } from './actions/user';
 
 function App() {
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(checkAuth());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,12 +29,19 @@ function App() {
 		if (useSelector((state) => state.auth.isAuth)) {
 			return <Route {...rest} />;
 		}
-		return <Redirect to="/login" />;
+		return (
+			<Redirect
+				to={{
+					pathname: '/login',
+					state: { dest: rest.location.pathname },
+				}}
+			/>
+		);
 	};
 
 	const LoginRoute = ({ component: Component, ...rest }) => {
 		if (useSelector((state) => state.auth.isAuth)) {
-			return <Redirect to="/dashboard" />;
+			return <Redirect to={rest.location.state.dest} />;
 		}
 		return <Route {...rest} />;
 	};
@@ -42,9 +50,6 @@ function App() {
 		<Router>
 			<Header />
 			<Switch>
-				<LoginRoute path="/login">
-					<Login />
-				</LoginRoute>
 				<AuthenticatedRoute path="/dashboard">
 					<Dashboard />
 				</AuthenticatedRoute>
@@ -60,6 +65,9 @@ function App() {
 				<AuthenticatedRoute path="/add">
 					<Add />
 				</AuthenticatedRoute>
+				<LoginRoute path="/login">
+					<Login />
+				</LoginRoute>
 				<AuthenticatedRoute component={Error} />
 			</Switch>
 		</Router>

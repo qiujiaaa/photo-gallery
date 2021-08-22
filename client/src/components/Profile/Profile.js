@@ -21,12 +21,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
 import { getUser, logout } from '../../actions/user';
 import { getPosts } from '../../actions/posts';
 import { USER_NOT_FOUND } from '../../constants/error';
-import { useParams, useHistory } from 'react-router-dom';
 
 const Profile = () => {
 	const { id } = useParams();
@@ -211,7 +211,7 @@ const Profile = () => {
 								);
 							})}
 						{posts.length === 0 && (
-							<Typography>This user has no posts.</Typography>
+							<Typography>No posts available yet.</Typography>
 						)}
 					</Grid>
 				</Grid>
