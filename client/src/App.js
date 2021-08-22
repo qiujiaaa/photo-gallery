@@ -41,7 +41,7 @@ function App() {
 
 	const LoginRoute = ({ component: Component, ...rest }) => {
 		if (useSelector((state) => state.auth.isAuth)) {
-			return <Redirect to={rest.location.state.dest} />;
+			return <Redirect to={'/dashboard'} />;
 		}
 		return <Route {...rest} />;
 	};
