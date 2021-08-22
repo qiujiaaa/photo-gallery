@@ -15,10 +15,12 @@ export const authUser = (token) => async (dispatch) => {
 export const checkAuth = () => async (dispatch) => {
 	try {
 		const user = await api.checkAuth();
-		dispatch({
-			type: 'AUTH',
-			payload: user,
-		});
+		if (user) {
+			dispatch({
+				type: 'AUTH',
+				payload: user,
+			});
+		}
 	} catch (err) {
 		console.log(err);
 	}

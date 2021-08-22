@@ -12,6 +12,16 @@ const createToken = function (auth) {
 	);
 };
 
+const verifyToken = function (token) {
+	return jwt.verify(token, 'my-secret', (err, decoded) => {
+		if (decoded) {
+			return decoded.id;
+		} else {
+			return null;
+		}
+	});
+};
+
 module.exports = {
 	generateToken: function (req, res, next) {
 		req.token = createToken(req.auth);
@@ -25,4 +35,5 @@ module.exports = {
 		});
 		return res.status(200).send(JSON.stringify(req.user));
 	},
+	verifyToken,
 };
