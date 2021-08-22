@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 
 const { generateToken, sendToken } = require('../utils/token');
-const { checkAuth } = require('../controllers/authController');
+const { checkAuth, logout } = require('../controllers/authController');
 
 router.post(
 	'/google',
@@ -23,5 +23,6 @@ router.post(
 );
 
 router.get('/check', checkAuth);
+router.get('/logout', logout);
 
 module.exports = router;

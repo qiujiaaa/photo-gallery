@@ -10,6 +10,11 @@ const reducer = (auth = { isAuth: false, user: {} }, action) => {
 				user: action.payload,
 				isAuth: true,
 			};
+		case 'LOGOUT':
+			return {
+				isAuth: false,
+				user: {},
+			};
 		default:
 			return auth;
 	}

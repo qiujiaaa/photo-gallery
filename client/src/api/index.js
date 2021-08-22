@@ -131,6 +131,15 @@ export const checkAuth = async () => {
 	}
 };
 
+export const logout = async () => {
+	try {
+		const res = await axios.get(auth + '/logout');
+		return res.data;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
 export const getUser = async (id) => {
 	try {
 		const res = await axios.get(users + '/' + id);

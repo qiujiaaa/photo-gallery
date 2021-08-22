@@ -1,9 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Grid, Paper, Avatar } from '@material-ui/core';
+import {
+	Box,
+	Typography,
+	Grid,
+	Paper,
+	Avatar,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Divider,
+	Dialog,
+	DialogContent,
+	DialogTitle,
+	DialogContentText,
+	DialogActions,
+	Button,
+} from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 import { useStyles } from './styles';
-import { getUser } from '../../actions/user';
+import { getUser, logout } from '../../actions/user';
 import { getPosts } from '../../actions/posts';
 import { USER_NOT_FOUND } from '../../constants/error';
 import { useParams, useHistory } from 'react-router-dom';
@@ -15,6 +35,7 @@ const Profile = () => {
 	const dispatch = useDispatch();
 
 	const [fetched, setFetched] = useState(false);
+	const [openConfirmLogout, setOpenConfirmLogout] = useState(false);
 
 	const classes = useStyles();
 
@@ -37,6 +58,19 @@ const Profile = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const handleLogout = () => {
+		dispatch(logout());
+		history.replace('/login');
+	};
+
+	const handleOpenConfirmLogout = () => {
+		setOpenConfirmLogout(true);
+	};
+
+	const handleCloseConfirmLogout = () => {
+		setOpenConfirmLogout(false);
+	};
 
 	return (
 		<div className={classes.root}>
@@ -84,6 +118,76 @@ const Profile = () => {
 								</Grid>
 							</Paper>
 						</Paper>
+						<Grid container item>
+							<List
+								className={classes.functions}
+								component="nav"
+								aria-label="functions"
+							>
+								<ListItem button className={classes.likes}>
+									<ListItemIcon>
+										<FavoriteIcon
+											className={classes.likeicon}
+										/>
+									</ListItemIcon>
+									<ListItemText primary="My Likes" />
+								</ListItem>
+								<Divider />
+								<ListItem button className={classes.bookmarks}>
+									<ListItemIcon>
+										<BookmarkIcon
+											className={classes.bookmarkicon}
+										/>
+									</ListItemIcon>
+									<ListItemText primary="My Bookmarks" />
+								</ListItem>
+								<Divider />
+								<ListItem
+									onClick={handleOpenConfirmLogout}
+									button
+									className={classes.logout}
+								>
+									<ListItemIcon>
+										<ExitToAppIcon
+											className={classes.logouticon}
+										/>
+									</ListItemIcon>
+									<ListItemText primary="Logout" />
+								</ListItem>
+								<Dialog
+									open={openConfirmLogout}
+									onClose={handleCloseConfirmLogout}
+									aria-labelledby="alert-dialog-title"
+									aria-describedby="alert-dialog-description"
+								>
+									<DialogTitle id="alert-dialog-title">
+										{'Do you want to logout?'}
+									</DialogTitle>
+									<DialogContent>
+										<DialogContentText id="alert-dialog-description">
+											Once you log out, you will have to
+											sign in via Google Authentication in
+											future.
+										</DialogContentText>
+									</DialogContent>
+									<DialogActions>
+										<Button
+											onClick={handleLogout}
+											color="primary"
+										>
+											Logout
+										</Button>
+										<Button
+											onClick={handleCloseConfirmLogout}
+											color="primary"
+											autoFocus
+										>
+											Cancel
+										</Button>
+									</DialogActions>
+								</Dialog>
+							</List>
+						</Grid>
 					</Grid>
 				</Grid>
 				<Grid item xs={12} md={8}>

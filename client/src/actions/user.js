@@ -26,6 +26,18 @@ export const checkAuth = () => async (dispatch) => {
 	}
 };
 
+export const logout = () => async (dispatch) => {
+	try {
+		await api.logout();
+		dispatch({
+			type: 'LOGOUT',
+			payload: {},
+		});
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const getUser = (id) => async (dispatch) => {
 	try {
 		const user = await api.getUser(id);

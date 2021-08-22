@@ -19,4 +19,13 @@ const checkAuth = async (req, res) => {
 	}
 };
 
-module.exports = { checkAuth };
+const logout = (req, res) => {
+	try {
+		res.clearCookie('jwt_token');
+		res.status(200).json({ message: 'Successfully logged out.' });
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
+};
+
+module.exports = { checkAuth, logout };

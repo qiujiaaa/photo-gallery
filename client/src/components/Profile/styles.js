@@ -74,4 +74,32 @@ export const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'center',
 	},
+	functions: {
+		marginTop: '30px',
+		width: '100%',
+	},
+	likes: {
+		'&:hover': {
+			'& $likeicon': {
+				color: '#ff4833',
+			},
+		},
+	},
+	likeicon: {},
+	bookmarks: {
+		'&:hover': {
+			'& $bookmarkicon': {
+				color: '#bc71e1',
+			},
+		},
+	},
+	bookmarkicon: {},
+	logout: {
+		'&:hover': {
+			'& $logouticon': {
+				color: '#efb6b2',
+			},
+		},
+	},
+	logouticon: {},
 }));
