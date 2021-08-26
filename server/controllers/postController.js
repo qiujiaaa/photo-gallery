@@ -86,23 +86,15 @@ const likePost = async (req, res) => {
 		const { userId } = req.query;
 
 		const post = await Post.findById(id);
-		const updatedPostLikes = post.likes + 1;
+		post.likes.push(userId);
+		const updatedLikes = [...new Set(post.likes)];
 		const updatedPost = await Post.findOneAndUpdate(
 			{ _id: id },
-			{ likes: updatedPostLikes },
-			{ new: true }
-		);
-
-		const user = await User.findById(userId);
-		user.likes.push(id);
-		const updatedLikes = [...new Set(user.likes)];
-		const updatedUser = await User.findOneAndUpdate(
-			{ _id: userId },
 			{ likes: updatedLikes },
 			{ new: true }
 		);
 
-		res.status(200).send({ post: updatedPost, user: updatedUser });
+		res.status(200).send(updatedPost);
 	} catch (err) {
 		res.status(404).json({ message: err.message });
 	}
@@ -114,23 +106,16 @@ const unlikePost = async (req, res) => {
 		const { userId } = req.query;
 
 		const post = await Post.findById(id);
-		const updatedPostLikes = post.likes - 1;
+		const updatedLikes = post.likes.filter((e) => e !== userId);
 		const updatedPost = await Post.findOneAndUpdate(
 			{ _id: id },
-			{ likes: updatedPostLikes },
-			{ new: true }
-		);
-
-		const user = await User.findById(userId);
-		const updatedLikes = user.likes.filter((e) => e !== id);
-		const updatedUser = await User.findOneAndUpdate(
-			{ _id: userId },
 			{ likes: updatedLikes },
 			{ new: true }
 		);
 
-		res.status(200).send({ post: updatedPost, user: updatedUser });
+		res.status(200).send(updatedPost);
 	} catch (err) {
+		console.log(err.message);
 		res.status(404).json({ message: err.message });
 	}
 };

@@ -23,12 +23,6 @@ const UserSchema = new mongoose.Schema({
 	token: {
 		type: String,
 	},
-	likes: {
-		type: [],
-	},
-	bookmarks: {
-		type: [],
-	},
 	createdAt: {
 		type: Date,
 		default: Date.now,

@@ -41,14 +41,21 @@ const Profile = () => {
 
 	let user = useSelector((state) => state.auth.user);
 	let viewedUser = useSelector((state) => state.user);
-	let posts = useSelector((state) => state.posts);
-	posts = posts
+	let allposts = useSelector((state) => state.posts);
+
+	let posts = allposts
 		.filter((x) => x.authorId === id)
 		.sort((x, y) => (x.createdAt > y.createdAt ? 1 : -1));
+
 	let likes = 0;
 	posts.forEach((post) => {
 		likes += post.likes;
 	});
+
+	// let likedPosts = allposts
+	// 	.filter((x) => viewedUser.likes.indexOf(x._id) > 0)
+	// 	.sort((x, y) => (x.createdAt > y.createdAt ? 1 : -1));
+	// console.log(viewedUser.likes);
 
 	useEffect(() => {
 		dispatch(getUser(id));
@@ -71,6 +78,10 @@ const Profile = () => {
 
 	const handleCloseConfirmLogout = () => {
 		setOpenConfirmLogout(false);
+	};
+
+	const goToPost = (id) => {
+		history.push(`/post/${id}`);
 	};
 
 	return (
@@ -200,7 +211,10 @@ const Profile = () => {
 							posts.map((post) => {
 								return (
 									<Grid key={post._id} item>
-										<Box className={classes.item}>
+										<Box
+											className={classes.item}
+											onClick={() => goToPost(post._id)}
+										>
 											<img
 												className={classes.post}
 												src={`/api/post/image/${post.img}`}

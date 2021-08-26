@@ -24,7 +24,7 @@ const Post = ({ post }) => {
 	const dispatch = useDispatch();
 
 	let user = useSelector((state) => state.auth.user);
-	const [liked, setLiked] = useState(user.likes.indexOf(post._id) >= 0);
+	const [liked, setLiked] = useState(post.likes.indexOf(user._id) >= 0);
 
 	const goIndividual = () => {
 		history.push(`/post/${post._id}`);
@@ -73,7 +73,7 @@ const Post = ({ post }) => {
 					onClick={() => handleLike()}
 					aria-label="add to favorites"
 				>
-					<Typography>{post.likes}</Typography>
+					<Typography>{post.likes.length}</Typography>
 					<FavoriteIcon
 						className={liked ? classes.unlike : classes.like}
 					/>

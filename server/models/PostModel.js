@@ -14,7 +14,11 @@ const postSchema = new mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 	},
 	likes: {
-		type: Number,
+		type: [],
+		require: true,
+	},
+	bookmarks: {
+		type: [],
 		require: true,
 	},
 	author: {

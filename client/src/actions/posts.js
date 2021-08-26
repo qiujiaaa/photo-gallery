@@ -41,7 +41,8 @@ export const createPost =
 			const data = await api.createImage(formData);
 			const img = data.data;
 			const { displayName: author, _id: authorId } = user;
-			const likes = 0;
+			const likes = [];
+			const bookmarks = [];
 			const post = await api.createPost({
 				title,
 				caption,
@@ -49,6 +50,7 @@ export const createPost =
 				author,
 				authorId,
 				likes,
+				bookmarks,
 			});
 			dispatch({
 				type: 'CREATE',
@@ -75,14 +77,10 @@ export const likePost =
 	({ postId, userId }) =>
 	async (dispatch) => {
 		try {
-			const { post, user } = await api.likePost({ postId, userId });
+			const post = await api.likePost({ postId, userId });
 			dispatch({
 				type: 'UPDATE_POST',
 				payload: post,
-			});
-			dispatch({
-				type: 'UPDATE_USER',
-				payload: user,
 			});
 		} catch (err) {
 			console.log(err);
@@ -93,14 +91,10 @@ export const unlikePost =
 	({ postId, userId }) =>
 	async (dispatch) => {
 		try {
-			const { post, user } = await api.unlikePost({ postId, userId });
+			const post = await api.unlikePost({ postId, userId });
 			dispatch({
 				type: 'UPDATE_POST',
 				payload: post,
-			});
-			dispatch({
-				type: 'UPDATE_USER',
-				payload: user,
 			});
 		} catch (err) {
 			console.log(err);
