@@ -100,6 +100,9 @@ export const useStyles = makeStyles((theme) => ({
 				color: '#efb6b2',
 			},
 		},
+		display: 'flex',
+		alignItems: 'center',
+		marginTop: '10px',
 	},
 	logouticon: {},
 }));
