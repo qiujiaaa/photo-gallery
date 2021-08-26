@@ -25,7 +25,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
-import { getPost, deletePost, likePost, unlikePost } from '../../actions/posts';
+import {
+	getPost,
+	deletePost,
+	likePost,
+	unlikePost,
+	savePost,
+	unsavePost,
+} from '../../actions/posts';
 import { POST_NOT_FOUND } from '../../constants/error';
 import { formatDate } from '../../utils/dateUtil';
 
@@ -43,6 +50,7 @@ const Post = () => {
 	let user = useSelector((state) => state.auth.user);
 
 	const [liked, setLiked] = useState(post.likes.indexOf(user._id) >= 0);
+	const [saved, setSaved] = useState(post.bookmarks.indexOf(user._id) >= 0);
 
 	useEffect(() => {
 		dispatch(getPost(id));
@@ -79,6 +87,16 @@ const Post = () => {
 		} else {
 			dispatch(unlikePost({ postId: post._id, userId: user._id }));
 			setLiked(false);
+		}
+	};
+
+	const handleSave = () => {
+		if (!saved) {
+			dispatch(savePost({ postId: post._id, userId: user._id }));
+			setSaved(true);
+		} else {
+			dispatch(unsavePost({ postId: post._id, userId: user._id }));
+			setSaved(false);
 		}
 	};
 
@@ -131,8 +149,15 @@ const Post = () => {
 									<IconButton
 										className={classes.save}
 										aria-label="save"
+										onClick={() => handleSave()}
 									>
-										<BookmarkIcon />
+										<BookmarkIcon
+											className={
+												saved
+													? classes.unsave
+													: classes.save
+											}
+										/>
 									</IconButton>
 
 									{user._id === post.authorId && (

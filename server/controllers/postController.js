@@ -120,6 +120,46 @@ const unlikePost = async (req, res) => {
 	}
 };
 
+const savePost = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { userId } = req.query;
+
+		const post = await Post.findById(id);
+		post.bookmarks.push(userId);
+		const updatedBookmarks = [...new Set(post.bookmarks)];
+		const updatedPost = await Post.findOneAndUpdate(
+			{ _id: id },
+			{ bookmarks: updatedBookmarks },
+			{ new: true }
+		);
+
+		res.status(200).send(updatedPost);
+	} catch (err) {
+		res.status(404).json({ message: err.message });
+	}
+};
+
+const unsavePost = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { userId } = req.query;
+
+		const post = await Post.findById(id);
+		const updatedBookmarks = post.bookmarks.filter((e) => e !== userId);
+		const updatedPost = await Post.findOneAndUpdate(
+			{ _id: id },
+			{ bookmarks: updatedBookmarks },
+			{ new: true }
+		);
+
+		res.status(200).send(updatedPost);
+	} catch (err) {
+		console.log(err.message);
+		res.status(404).json({ message: err.message });
+	}
+};
+
 const editPost = async (req, res) => {
 	try {
 		const { id } = req.params;
@@ -145,4 +185,6 @@ module.exports = {
 	likePost,
 	unlikePost,
 	editPost,
+	savePost,
+	unsavePost,
 };

@@ -80,6 +80,32 @@ export const unlikePost = async ({ postId, userId }) => {
 	}
 };
 
+export const savePost = async ({ postId, userId }) => {
+	try {
+		const res = await axios.put(
+			posts + '/save/' + postId,
+			{},
+			{ params: { userId } }
+		);
+		return res.data;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
+export const unsavePost = async ({ postId, userId }) => {
+	try {
+		const res = await axios.put(
+			posts + '/unsave/' + postId,
+			{},
+			{ params: { userId } }
+		);
+		return res.data;
+	} catch (err) {
+		console.log(err.message);
+	}
+};
+
 export const editPost = async ({ id, title, caption }) => {
 	try {
 		const res = await axios.put(

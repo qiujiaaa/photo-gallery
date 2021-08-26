@@ -60,8 +60,15 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	save: {
+		color: 'grey',
 		'&:hover': {
 			color: '#bc71e1',
+		},
+	},
+	unsave: {
+		color: '#bc71e1',
+		'&:hover': {
+			color: 'grey',
 		},
 	},
 	description: {

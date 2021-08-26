@@ -101,6 +101,34 @@ export const unlikePost =
 		}
 	};
 
+export const savePost =
+	({ postId, userId }) =>
+	async (dispatch) => {
+		try {
+			const post = await api.savePost({ postId, userId });
+			dispatch({
+				type: 'UPDATE_POST',
+				payload: post,
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+export const unsavePost =
+	({ postId, userId }) =>
+	async (dispatch) => {
+		try {
+			const post = await api.unsavePost({ postId, userId });
+			dispatch({
+				type: 'UPDATE_POST',
+				payload: post,
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 export const editPost =
 	({ id, title, caption }) =>
 	async (dispatch) => {
