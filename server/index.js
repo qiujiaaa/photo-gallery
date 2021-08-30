@@ -6,6 +6,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 // load config
 dotenv.config({ path: './config/config.env' });
@@ -68,7 +69,17 @@ app.use('/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 
+app.get('/', (req, res) => {
+	res.send('Hello to Capture API');
+});
+
 const PORT = process.env.PORT || 5000;
+
+// path to build folder
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.get('*', function (request, response) {
+	response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 app.listen(
 	PORT,
