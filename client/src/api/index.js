@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const posts = 'http://localhost:5000/api/post';
-const auth = 'http://localhost:5000/auth';
-const images = 'http://localhost:5000/api/post/image';
-const users = 'http://localhost:5000/api/user';
+const posts = 'https://capturee.herokuapp.com/api/post';
+const auth = 'https://capturee.herokuapp.com/auth';
+const images = 'https://capturee.herokuapp.com/api/post/image';
+const users = 'https://capturee.herokuapp.com/api/user';
 
 axios.defaults.withCredentials = true;
 
@@ -138,7 +138,7 @@ export const authUser = async (token) => {
 			credentials: 'include',
 		};
 		const response = await fetch(
-			'http://localhost:5000/auth/google',
+			'https://capturee.herokuapp.com/auth/google',
 			options
 		);
 		const user = await response.json();

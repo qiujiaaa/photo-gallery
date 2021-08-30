@@ -124,7 +124,7 @@ const Post = () => {
 					<Grid item xs={12} md={6}>
 						<Grid className={classes.media}>
 							<img
-								src={`/api/post/image/${post.img}`}
+								src={`https://capturee.herokuapp.com/api/post/image/${post.img}`}
 								alt="error"
 							/>
 							<Paper>

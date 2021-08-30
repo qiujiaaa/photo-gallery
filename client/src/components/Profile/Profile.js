@@ -268,7 +268,7 @@ const Profile = () => {
 											>
 												<img
 													className={classes.post}
-													src={`/api/post/image/${post.img}`}
+													src={`https://capturee.herokuapp.com/api/post/image/${post.img}`}
 													alt="no input"
 												/>
 											</Box>
@@ -294,7 +294,7 @@ const Profile = () => {
 											>
 												<img
 													className={classes.post}
-													src={`/api/post/image/${post.img}`}
+													src={`https://capturee.herokuapp.com/api/post/image/${post.img}`}
 													alt="no input"
 												/>
 											</Box>
@@ -320,7 +320,7 @@ const Profile = () => {
 											>
 												<img
 													className={classes.post}
-													src={`/api/post/image/${post.img}`}
+													src={`https://capturee.herokuapp.com/api/post/image/${post.img}`}
 													alt="no input"
 												/>
 											</Box>

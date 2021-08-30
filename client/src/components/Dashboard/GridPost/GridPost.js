@@ -48,7 +48,7 @@ const Post = ({ post }) => {
 		<Card variant="elevation" className={classes.card}>
 			<CardMedia
 				className={classes.cardmedia}
-				image={`/api/post/image/${post.img}`}
+				image={`https://capturee.herokuapp.com/api/post/image/${post.img}`}
 				title={title}
 				component="img"
 				onClick={() => goIndividual()}

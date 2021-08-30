@@ -25,6 +25,8 @@ connectDB();
 // initialise server
 const app = express();
 
+app.set('trust proxy', 1);
+
 // morgan for logging
 app.use(morgan('dev'));
 
@@ -52,6 +54,10 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+		cookie: {
+			sameSite: 'none',
+			secure: true,
+		},
 	})
 );
 
@@ -74,12 +80,6 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-
-// path to build folder
-app.use(express.static(path.resolve(__dirname, '../client/build')));
-app.get('*', function (request, response) {
-	response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-});
 
 app.listen(
 	PORT,
