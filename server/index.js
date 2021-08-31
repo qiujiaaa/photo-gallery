@@ -36,7 +36,7 @@ app.use(cookieParser());
 
 // cors to fix cross origin error
 var corsOption = {
-	origin: true,
+	origin: 'https://capturee.netlify.app',
 	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 	credentials: true,
 	exposedHeaders: ['x-auth-token'],
@@ -53,6 +53,7 @@ app.use(
 		secret: 'keyboardcat',
 		resave: false,
 		saveUninitialized: false,
+		proxy: true,
 		store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
 		cookie: {
 			sameSite: 'none',
